@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>地址选择</title>
+		<link href="css/sm.css" rel="stylesheet">
+		<link href="css/iconfont/iconfont.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+		<div class="page gray-bg" id="page-allOrder">
+			<header class="bar bar-nav red-bg">
+				<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);" onclick="delLoaclTabInfo();"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+				<a class="icon pull-right f-white all-order-font-b" href="javascript:void(0);" id="search-btn">搜索</a>
+				<h1 class="title">
+			<input type="text"  class="all-order-search-input" id="search-addr" placeholder="请输入地址">
+		</h1>
+			</header>			
+			<div class="content">
+				<!--地址选择开始--->
+				<div class="address-map vertical-box">
+
+					<div id="wrap-map" class="vertical-box">
+						<div id="line-map"></div>
+						<div id="map-marker"></div>
+					</div>
+
+					<div class="select-address">
+						<!--<div class="no-address h-vertical-align">
+							<img src="images/map.jpg"><div>该附近没有关键建筑物或商店，请拖动标志重新地图选址！</div>
+						</div>-->
+						
+					</div>
+				</div>
+				<!--地址选择结束--->
+			</div>
+			<!--end content -->
+		</div>
+		<!--end page -->
+
+		<script src="js/zepto.js"></script>
+		<script>
+			$.config = {
+				router: false
+			}
+		</script>
+		<script src="js/sm.js"></script>
+		<script src="js/all.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4SX8yWh8bj3Fi6eGLUbK2jYh"></script>
+		<script>
+		
+		/****
+		 * *地址选择调用说明
+		 * 调用地图须在址址栏传两个参数
+		 * 地址栏信息：allOrder-address-select.html?pagecurren=allOrder-shop-setting.html&area=深圳市
+		 * 地址栏信息里有两个参数pagecurren：当前页面地址（选择好地址后返回的页面）
+		 * area：根据这个参数查询地图，如果为空就根据用户当前位置进行定位查询地图，否则就按该地址时行查询地图
+		 * 选择好地址后返回当前页面就如下 
+		 * allOrder-shop-setting.html?address=中翠路17桂芳园八期31号楼d101-103商铺&title=华润万家(桂芳园店)&lat=22.546051&lng=114.02597
+		 * address：详细地址，title：关键建筑物商店等  lat、lng：经纬度
+		 * **/
+			$(function() {
+				window.myMap = {
+					init: function() {
+					
+						this.pagecurren =("" == getURLParameter("pagecurren")) ? "" : decodeURI(getURLParameter("pagecurren"));
+						var area =("" == getURLParameter("area")) ? "" : decodeURI(getURLParameter("area"));
+						if(area==""){
+							this.mapInit();
+						}else{
+							this.createMap();		
+							this.searchByWord(area);
+						}
+					},
+					//地图初始化
+					mapInit: function() {
+						var that = this;
+						this.geoc = new BMap.Geocoder(); //地址反解析
+						$.showPreloader('定位中，请稍后...')
+						var geolocation = new BMap.Geolocation();
+						geolocation.getCurrentPosition(function(r) {
+							if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+								var pt = new BMap.Point(r.point.lng, r.point.lat);
+								//坐标转换完之后的回调函数
+								that.geoc.getLocation(pt, function(rs) {
+									$.hidePreloader();
+									var addComp = rs.addressComponents;
+									var html = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+									//获取当前定位的相关信息
+									that.currtitle = html;
+									that.curraddress = html;
+									that.currlat = pt.lat;
+									that.currlng = pt.lng;
+									that.createMap();
+								});
+							} else {
+								$.toast("定位失败", 2000);
+							}
+						}, {
+							enableHighAccuracy: true
+						})
+					},
+					createMap: function() {
+					
+						// 创建Map实例
+						this.map = new BMap.Map("line-map");
+						//113.95278,22.553844
+						this.map.centerAndZoom(new BMap.Point(this.currlng, this.currlat), 20);
+						// 添加默认缩放平移控件
+						this.map.addControl(new BMap.NavigationControl());
+						// 添加默认比例尺控件
+						//map.addControl(new BMap.ScaleControl());
+						// 添加默认缩略地图控件
+						this.map.addControl(new BMap.OverviewMapControl());
+						// 添加默认地图控件
+						this.map.addControl(new BMap.MapTypeControl());
+						this.map.enableScrollWheelZoom(); // 启用滚轮放大缩小，默认禁用
+						//map.enableContinuousZoom();// 启用地图惯性拖拽，默认禁用
+						var point = new BMap.Point(this.currlng, this.currlat);
+						this.createMarker(point);
+						// 初始化地图,设置城市和地图级别。			
+						var ac = new BMap.Autocomplete( //建立一个自动完成的对象
+							{
+								"input": "search-addr",
+								"location": this.map
+							});
+						this.myGeo = new BMap.Geocoder();
+						var that = this;
+						ac.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
+							$("#search-addr").blur();
+							var _value = e.item.value;
+							myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+							that.myGeo.getPoint(myValue, function(point) {
+								if (point) {
+									that.getAddressInfoByPoint(point)
+								} else {
+									alert("您选择地址没有解析到结果!");
+								}
+							}, "北京市");
+						});
+					},
+					createMarker: function(point) {
+						$("#map-marker").show();
+						// 初始化地图,设置中心点坐标和地图级别。
+						this.map.centerAndZoom(point, 20);
+						this.getAddressInfoByPoint(point);
+						var that = this;
+						//移动地图选址
+						this.map.addEventListener('moving', function() {
+							var center = that.map.getCenter();
+							//map.centerAndZoom(center,20);   
+							that.getAddressInfoByPoint(center, "moving", "", "", "", "");
+						});
+						this.map.addEventListener('moveend', function() {
+							$("#map-marker").addClass("map-marker-animate");
+							setTimeout(function() {
+								$("#map-marker").removeClass("map-marker-animate");
+							}, 1000);
+						});
+					},
+					//根据百度经纬度坐标反查地址
+					getAddressInfoByPoint: function(pt) {	
+						this.geoc = new BMap.Geocoder()
+						var that = this;
+						this.map.centerAndZoom(pt, 20);
+						this.geoc.getLocation(pt, function(rs) {
+							var addComp = rs.addressComponents;
+							that.createNearByMapInfo(rs);
+						});
+					},
+					createNearByMapInfo: function(rs) {
+						var html = "";
+						if(rs.surroundingPois.length==0){
+							html='<div class="no-address h-vertical-align"><img src="images/map.jpg"><div>该附近没有关键建筑物或商店，请拖动地图重新地图选址！</div></div>'
+						}
+						for (var i = 0; i < rs.surroundingPois.length; i++) {
+							var json = "{address:'" + rs.surroundingPois[i].address + "',title:'" + rs.surroundingPois[i].title + "',lng:'" + rs.surroundingPois[i].point.lng + "',lat:'" + rs.surroundingPois[i].point.lat + "'}"
+							if (i == 0) {
+								html += '<div class="select-address-item flex-box ui-border-b" info="' + json + '" onclick="myMap.selectAddress(this)"><div class="img h-vertical-align"><img src="images/pos.jpg"></div><div class="flex-pos vertical-align"><div>' + rs.surroundingPois[i].title + '<div class="f-gray">' + rs.surroundingPois[i].address + '</div></div></div>' + '<div class="icon iconfont icon-duigou first-record h-vertical-align"></div>' + '</div>'
+							} else {
+								html += '<div class="select-address-item flex-box ui-border-b" info="' + json + '" onclick="myMap.selectAddress(this)"><div class="img h-vertical-align"><img src="images/pos.jpg"></div><div class="flex-pos vertical-align"><div>' + rs.surroundingPois[i].title + '<div class="f-gray">' + rs.surroundingPois[i].address + '</div></div></div></div>'
+							}
+						}
+						$(".select-address").empty().append(html)
+					},
+					searchByWord: function(word) {
+						var that = this;
+						this.myGeo.getPoint(word, function(point) {
+							if (point) {
+								that.getAddressInfoByPoint(point)
+							} else {
+								alert("您选择地址没有解析到结果!");
+							}
+						}, "北京市");
+					},
+					selectAddress: function(obj) {
+						var info = eval('(' + $(obj).attr("info") + ')');
+						var urlInfo="?address="+info.address+"&title="+info.title+"&lat="+info.lat+"&lng="+info.lng						
+						window.location=this.pagecurren+urlInfo
+					}
+				}
+				myMap.init();
+				$("#search-btn").click(function() {
+					var searchAddr = $("#search-addr").val();
+					if (searchAddr == "") {
+						$.toast("请输入地址关键！")
+					} else {
+						myMap.searchByWord(searchAddr)
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

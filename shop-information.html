@@ -1,0 +1,220 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>店铺信息</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="show-infomation">
+	<header class="bar bar-nav red-bg" id="show-infomation-header-one">
+		<h1 class="title f-white">店铺信息</h1>
+	</header>
+
+	<div class="content shop-infomation shop-content-pb" id="show-infomation-content-one">
+    	<div class="list-app-box topno">
+			<ul>
+				<li>
+					<span class="input-title-left">店铺名称<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="shop-info-name" class="input-itxtp r t-r" placeholder="请输入"/>
+					
+				</li>
+				<li>
+					<span class="input-title-left">主营类目<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="shop-info-type" class="input-itxtp input-icon t-r picker-type" id="picker-type" placeholder=""/>
+					<i class="iconfont icon-xiangyou icon-r picker-type"></i>
+					
+				</li>
+			</ul>
+			
+		</div><!--end list-block-->
+		<div class="list-app-box">
+			<ul>
+				<li>
+					<span class="input-title-left">联系人姓名<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="shop-info-people"class="input-itxtp r t-r" placeholder="请输入"/>
+					
+				</li>
+				<li>
+					<span class="input-title-left">手机号码<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="shop-info-phone" class="input-itxtp r t-r" placeholder="请输入手机号"/>
+				</li>
+				
+			</ul>
+			
+		</div><!--end list-block-->
+		<div class="list-app-title">
+			<span class="input-title-left">店铺地址</span>	
+		</div><!--end list-app-title-->
+		<div class="list-app-box">
+			<ul>
+			
+				<li>
+					<span class="input-title-left">定位区域<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="areaSelectSpan" onClick="showmap()" class="input-itxtp input-icon t-r picker-type" placeholder="" >
+					
+					<input type="hidden" class="address-input-text f-black" value="" id="areaSelect"> 
+					<input type="hidden" class="address-input-text f-black" value="" id="province">
+					<input type="hidden" class="address-input-text f-black" value="" id="city">
+					<input type="hidden" class="address-input-text f-black" value="" id="area">
+					<input type="hidden" class="address-input-text f-black" value="" id="addressInfo">
+					<input type="hidden" class="address-input-text f-black" value="" id="lat">
+					<input type="hidden" class="address-input-text f-black" value="" id="lng">
+					<i class="iconfont icon-xiangyou icon-r "></i>	
+				</li>
+				<li>
+					<span class="input-title-left">详细地址<i class="pun-bt f-red">*</i></span>
+					<input type="text" id="detailAddress"class="input-itxtp r t-r" placeholder="请输入"/>
+					
+				</li>
+			</ul>
+		</div><!--end list-block-->
+		<div class="list-app-box">
+			<ul>
+				<li>
+					<span class="input-title-left">店铺简介<i class="pun-bt f-red">*</i></span>
+					<input type="text" maxlength="200" id="shop-introduction"class="input-itxtp r t-r" placeholder="请输入"/>
+				</li>
+				
+			</ul>
+			
+		</div><!--end list-block-->
+		
+		<p class="btn-p t-c">
+				<a href="#" onclick="submitData();" class="next-btn red-bg f-white">下一步</a>
+			</p>
+	</div><!--end content -->
+	<div class="picker-shadow" ></div>
+
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+//地址获取
+var areaSelectSpan =("" == getURLParameter("address")) ? "" : decodeURI(getURLParameter("address"));
+var areatitle =("" == getURLParameter("title")) ? "" : decodeURI(getURLParameter("title"));//标题
+var arealat =("" == getURLParameter("lat")) ? "" : decodeURI(getURLParameter("lat"));
+var arealng =("" == getURLParameter("lng")) ? "" : decodeURI(getURLParameter("lng"));
+if(areaSelectSpan != ""){
+	$('#areaSelectSpan').val(areaSelectSpan);
+}
+function showmap(){
+	var area= $('#areaSelectSpan').val();
+	var pagecurren="shop-information.html";
+	var address = "?area="+encodeURI(area)+"&pagecurren="+encodeURI(pagecurren);
+	window.location="allOrder-address-select.html"+address;
+}
+  //提交按钮
+function submitData(){
+//shop-info-name:请输入店铺名称,shop-info-type：请输入主营类目，shop-info-people：请输入所联系人姓名，detailAddress:详细地址
+  if(isEmptyInputVal("shop-info-name","请输入店铺名称")&&isEmptyInputVal("shop-info-type","请输入主营类别")&&isEmptyInputVal("shop-info-people","请输入联系人名称")&&isEmptyInputVal("shop-info-phone","请输入手机号码")&&isEmptyInputVal("areaSelectSpan","请定位地址")&&isEmptyInputVal("detailAddress","请输入详细地址")&&isEmptyInputVal("shop-introduction","请输入店铺简介")){
+  		var infoPhone = $("#shop-info-phone").val();
+       if(infoPhone.length!=0){
+  		   //检查电话号码是否匹配
+	  		if(isPhone(infoPhone,"请输入正确手机号")){
+				//输入不为空，则跳转
+				window.location="shop-photos-check.html";
+	  			//alert("提交");
+	  		}
+  		}
+       else{
+       	alert("提交");
+       }
+  	}
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val() == ""){
+		flag = false;
+		/*layer.open({
+			content: tip,
+			style: 'background: #000;opacity: 0.8;color: #F9F7F7;',
+			time: 1
+		});*/
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+
+//判断输入是否存上传门店照片
+function isEmptypic(id,tip){
+	var flag = true;
+	if($("#"+id).html() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+var validateJson = {
+	"Phone":{"reg":"^((0{0,1})|(\\+?86)|(\\(\\+86\\)))(13[0-9]|15[0-9]|147|17[0-9]|18[0-9])[0-9]{8}$","tip":"输入合法手机号码"}
+	//"Tell":{"reg":"^((\\+?86)|(\\(\\+86\\)))?\\d{3,4}-\\d{7,8}(-\\d{3,4})?$","tip":"国内电话号码，格式: 0755-6305222 或 021-8788882"},
+	//"Mail":{"reg":"^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$","tip":"输入合法邮箱格式"}
+};
+	
+//手机电话格式校验
+function isPhone(number,tip)
+{
+	var isMobile = new RegExp(validateJson.Phone.reg);
+	if(isMobile.test(number) )
+	{
+		 return true;	
+	}
+	else
+	{
+		$.toast(tip, 2000);
+		return false;
+	}
+}
+
+</script>
+	
+<!--主营栏目   start -->
+
+<script>
+//类目创建
+$(".picker-type").picker({
+  toolbarTemplate: '<header class="bar bar-footer bar-nav">\
+  <button class="button button-link pull-left">按钮</button>\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">类目选择</h1>\
+  </header>',
+  cols: [
+    {
+      textAlign: 'center',
+      values: ['食品', '金融', '贸易', '网络']
+    }
+  ]
+});
+//遮罩层  js 显示隐藏
+$('#shop-info-type').click(function(){
+	$('.picker-shadow').show();
+})
+$('.close-picker').live('click',function() {
+		$('.picker-shadow').hide();
+		})
+$('.picker-shadow').click(function(){
+	$('.picker-shadow').hide();
+})
+
+</script>
+<!--主营栏目  end -->
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title>店铺设置</title>
+		<link href="css/sm.css" rel="stylesheet">
+		<link href="css/iconfont/iconfont.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+	</head>
+
+	<body>
+		<div class="page gray-bg">
+			<header class="bar bar-nav red-bg">
+				<a class="icon pull-left f-white back-prev-link" href="index.html"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+				<h1 class="title f-white">店铺设置</h1>
+			</header>
+
+			<div class="content">
+				<!--店铺设置开始-->
+				<div class="shop-settting">
+					<!--店铺头部信息开始-->
+					<div class="shop-setting-head">
+						<div class="shop-settimg-img" id="shop-settimg-img">
+							<div>
+								<span>点击设置</span>
+								<p>店铺形象 </p>
+							</div>
+							<img src="ad/003.jpg" class="hide">
+						</div>
+						<div>魅力无限 云上旗舰店 </div>
+						<div class="shop-setting-style">服装类</div>
+						<input type="file" id="head-img">
+					</div>
+					<!--店铺头部信息结束-->
+					<div class="shop-setting-content">
+						<div class="shop-line ui-border-b flex-box">
+							<div class="shop-left flex-pos">
+								店铺状态
+							</div>
+							<div class="shop-right">
+								<div class="item-input">
+									<label class="input-checkbox fr">
+										<input type="checkbox" checked="checked" id="shopStatu">
+										<div><i>&nbsp;</i> <span>关</span> <span>开</span></div>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="shop-line flex-box">
+							<div class="shop-left flex-pos">
+								是否开具发票
+							</div>
+							<div class="shop-right">
+								<div class="item-input">
+									<label class="input-checkbox fr">
+										<input type="checkbox" checked="checked">
+										<div><i>&nbsp;</i> <span>否</span> <span>是</span></div>
+									</label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="shop-setting-title">营业时间</div>
+					<div class="shop-setting-content">
+						<div class="shop-line ui-border-b flex-box">
+							<div class="shop-left flex-pos flex-box">
+								<div>上午</div>
+								<div class="shop-time flex-pos">
+									<input type="text" value="09 : 12" id="morning">
+								</div>
+							</div>
+
+							<div class="shop-right right-arrow">
+								<i class="iconfont icon-xiangyou r"></i>
+							</div>
+
+						</div>
+						<div class="shop-line ui-border-b flex-box">
+							<div class="shop-left flex-pos flex-box">
+								<div>下午</div>
+								<div class="shop-time flex-pos">
+									<input type="text" value="23 : 00" id="afternoon">
+								</div>
+							</div>
+							<div class="shop-right right-arrow">
+								<i class="iconfont icon-xiangyou r"></i>
+							</div>
+						</div>
+						<div class="shop-line flex-box">
+							<div class="shop-left flex-pos">
+								非营业时间是否接单
+							</div>
+							<div class="shop-right">
+								<div class="item-input">
+									<label class="input-checkbox fr">
+										<input type="checkbox" checked="checked">
+										<div><i>&nbsp;</i> <span>否</span> <span>是</span></div>
+									</label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!--<div class="shop-setting-content" onclick="window.location='allOrde-service-plot.html'">
+						<div class="shop-line flex-box">
+							<div class="shop-left flex-pos">
+								店铺服务小区
+							</div>
+							<div class="shop-right">
+								<span class="num"></span>3
+								<i class="iconfont icon-xiangyou r"></i>
+							</div>
+						</div>
+					</div>-->
+
+					<div class="shop-setting-title new">店铺地址</div>
+					<div class="rows white-bg shop-line-new shop-setting-address-box ui-border-b">
+						<div class="cols cols-25">定位区域</div>
+						<div class="cols t-l">
+							<div class="f-gray shop-setting-address-new" id="shop-setting-address">请选择定位区域</div>
+						</div>
+						<i class="iconfont icon-xiangyou address-add-input-arrow"></i>
+					</div>
+					<div class="rows white-bg shop-line-new shop-setting-address-box">
+						<div class="cols cols-25">详细地址</div>
+						<div class="cols t-l">
+							<input type="text" class="shop-setting-address-new all-order-font-s f-black" placeholder="请输入详细地址">
+						</div>
+					</div>
+					
+					<div class="t-c refund-price-content">
+						<a href="javascript:void(0);" class="t-c fr f-white refund-price-btn new red-bg" id="submitData" onclick="submit();">保存</a>
+					</div>
+				</div>
+				<!--店铺设置结束-->
+
+				<!--end content -->
+			</div>
+			<!--end page -->
+			<div class="picker-shadow"></div>
+			<script src="js/zepto.js"></script>
+			<script>
+				$.config = {
+					router: false
+				}
+			</script>
+			<script src="js/sm.js"></script>
+			<script src="js/all.js"></script>
+			<script>
+			$(function(){
+				//头像设置
+				$("#shop-settimg-img").click(function(){
+					$(this).children("div").hide();
+					$(this).children("img").show();
+				});
+			});
+				function submit(){		
+					var shopStatu = $("#shopStatu").is(":checked")
+					alert("店铺状态："+shopStatu);
+					if($("#shop-setting-address").text()=="请选择定位区域"){
+						$.toast("请选择定位区域");
+						return false;
+					}
+				}
+				
+				
+					//上午营业时间				
+					$("#morning").picker({
+						toolbarTemplate: '<header class="bar bar-nav">\
+	        <span class="picker-cancel button fl close-picker">\
+	      取消\
+	      </span>\
+	      <span class="picker-sure button fr close-picker">\
+	      确定\
+	      </span>\
+	      <div class="title picker-title">请选择上午营业时间</div>\
+	      </header>',
+						cols: [{
+							textAlign: 'center',
+							values: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11']
+								//如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+						},{
+							textAlign: 'center',
+							values: [':']
+								//如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+						}, {
+							textAlign: 'center',
+							values: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
+						}]
+					});
+					//下午营业时间
+					$("#afternoon").picker({
+						toolbarTemplate: '<header class="bar bar-nav">\
+	        <span class="picker-cancel button fl close-picker">\
+	      取消\
+	      </span>\
+	      <span class="picker-sure button fr close-picker">\
+	      确定\
+	      </span>\
+	      <div class="title picker-title">请选择下午营业时间</div>\
+	      </header>',
+						cols: [{
+							textAlign: 'center',
+							values: ['12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '23']
+								//如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+						},{
+							textAlign: 'center',
+							values: [':']
+								//如果你希望显示文案和实际值不同，可以在这里加一个displayValues: [.....]
+						}, {
+							textAlign: 'center',
+							values: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59']
+						}]
+					});
+					//显示黑层
+					$("#afternoon,#morning").click(function() {
+							$(".picker-shadow").show();
+						})
+						//隐藏黑层
+					$(".close-picker,.picker-shadow").live("click", function() {
+							$(".picker-shadow").hide();
+						})
+						//调用地图选择地址
+					$("#shop-setting-address").click(function() {
+						var currentAddress = $(this).html()
+						if (currentAddress == '请选择定位区域') {
+							currentAddress = ''
+						}
+						var params = "?pagecurren=allOrder-shop-setting.html&area=" + currentAddress;
+						window.location = "allOrder-address-select.html" + params;
+					})
+					var address = ("" == getURLParameter("address")) ? "" : decodeURI(getURLParameter("address"));
+					if (address == "") {} else {
+						$("#shop-setting-address").html(address).removeClass("f-gray")
+					}
+			</script>
+
+	</body>
+
+</html>

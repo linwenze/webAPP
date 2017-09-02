@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="stylesheet" href="css/sm.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="page"> 
+  <div class="content"> 
+    <input type="text" id='picker'/>
+  </div>
+</div>
+<script src="js/zepto.js"></script>
+<script src="js/sm.js"></script> 
+<script>
+var t;
+//一级菜单数组数据
+var oneTypeArr = [""];
+//二级菜单数据
+var twoTypeArr = [""];
+//三级菜单数据
+var threeTypeArr = [""];
+
+//一级菜单json数据，key代表id，value代表值
+var oneTypeObj = {"1001":"北京","2001":"广东","3001":"湖南"};
+//一级菜单数组数据
+oneTypeArr = getArrByJson(oneTypeObj);
+
+//二级菜单json数据，key代表id，value代表值
+var twoTypeObj = {"1001001":"东城区","1001002":"西城区","1001003":"崇文区"};
+//二级菜单数组数据
+twoTypeArr = getArrByJson(twoTypeObj);
+
+//第一个选择的值
+var currentOneSelectVal = oneTypeArr[0];
+//第二个选择的值
+var currentTwoSelectVal = twoTypeArr[0];
+
+//获取json数组的value
+function getArrByJson(obj){
+	var tempArr = [];
+	for(var key in obj){
+		tempArr.push(obj[key]);
+	}
+	return tempArr;
+}
+
+//获取json数组的key
+function getArrIndex(val,obj){
+	var countVal = "";
+	for(var key in obj){
+		if(obj[key] == val){
+			countVal = key;
+		}
+	}
+	return countVal;
+}
+
+$("#picker").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">请选择区域</h1>\
+  </header>',
+  onChange: function (picker, values, displayValues) {
+	 	 	var newOneSelectVal = picker.cols[0].value;
+        var newTwoSelectVal;
+        if(newOneSelectVal !== currentOneSelectVal) {
+            clearTimeout(t);
+
+            t = setTimeout(function(){
+                var newTwoArrs = getTwoJsonData(newOneSelectVal); //获取第二个的json数据
+                newTwoSelectVal = newTwoArrs[0];
+                var newThreeArrs = getThreeJsonData(newTwoSelectVal); //获取第三个的json数据
+                picker.cols[1].replaceValues(newTwoArrs);
+                picker.cols[2].replaceValues(newThreeArrs);
+                currentOneSelectVal = newOneSelectVal;
+                currentTwoSelectVal = newTwoSelectVal;
+                picker.updateValue();
+            }, 200);
+            return;
+        }
+        newTwoSelectVal = picker.cols[1].value;
+        if(newTwoSelectVal !== currentTwoSelectVal) {
+            picker.cols[2].replaceValues(getThreeJsonData(newTwoSelectVal));
+            currentTwoSelectVal = newTwoSelectVal;
+            picker.updateValue();
+        }
+  },
+  cols: [
+    {
+      textAlign: 'center',
+      values: oneTypeArr
+    },
+    {
+      textAlign: 'center',
+      values: twoTypeArr
+    },
+    {
+      textAlign: 'center',
+      values: threeTypeArr
+    }
+  ]
+});
+
+//获取第二个json数据
+function getTwoJsonData(newOneSelectVal){
+	var selectId = getArrIndex(newOneSelectVal,oneTypeObj); //根据选中的value值获取对应id
+	
+	//二级菜单json数据，key代表id，value代表值
+	var newTwoTypeObj = {"2001001":"广州","2001002":"深圳","2001003":"珠海"};
+	var newtwoTypeArr = getArrByJson(newTwoTypeObj);
+	
+	if(newtwoTypeArr.length > 0) {
+	  return newtwoTypeArr;
+	}
+  return [""];
+}
+
+//获取第二个json数据
+function getThreeJsonData(newTwoSelectVal){
+	var selectId = getArrIndex(newTwoSelectVal,twoTypeObj); //根据选中的value值获取对应id
+	
+	//二级菜单json数据，key代表id，value代表值
+	var newThreeTypeObj = {"20010010001":"越秀区","20010020001":"荔湾区","20010030001":"海珠区"};
+	var newThreeTypeArr = getArrByJson(newThreeTypeObj);
+	
+	if(newThreeTypeArr.length > 0) {
+	  return newThreeTypeArr;
+	}
+  return [""];
+}
+</script>
+</body>
+</html>

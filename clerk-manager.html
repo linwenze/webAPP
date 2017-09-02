@@ -1,0 +1,252 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>员工管理</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="clerk-manager">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">员工管理</h1>
+	</header>
+	<div id="nodata" class="t-c hide">
+		<p class="warning-img">
+			<i class="icon-no-people"></i>
+		</p>
+		<p class="warning-msg newmtop f-black">还没有店员哦，快来添加吧！</p>
+		<a href="clerk-add.html" class="add-clerk-btn f-red">新增店员</a>
+	</div>
+	<div id="showdata">
+    <div class="clerkmanager manager-box">  
+    	<ul class="clerkmanager-list">
+    		<li>
+	             <div class="crbox">
+	             	<span>店员姓名</span>
+		             <span>账号</span>
+		             <span>类型</span>
+	             </div>
+	       </li>
+        </ul>
+    </div>
+	<div class="content pull-to-refresh-content clerk-bottom clerkmanager-top infinite-scroll infinite-scroll-bottom" data-ptr-distance="55" data-distance="50" style="top:0">
+			<!-- 默认的下拉刷新层 -->
+			    <div class="pull-to-refresh-layer">
+			        <div class="preloader"></div>
+			        <div class="pull-to-refresh-arrow"></div>
+			    </div>
+			
+    	 <div class="list-app-box no-margin clerkmanager">
+    		
+			<ul class="clerkmanager-list ">
+				<li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+                
+                <li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>非店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+                
+                <li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+                
+                <li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>非店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+                
+                <li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+                
+                <li>
+					<div class="crbox">
+                        <span>小魔图</span>
+                        <span>18823359549</span>
+                        <span>非店长</span>
+                    </div>
+					<p class="crbox bot">
+						<a href="clerk-add.html"><i class="iconfont icon-xiugaishijian"></i> 修改</a>
+						<a href="javascript:void(0)" data-id="1882553662" class="delete-clerk"><i class="iconfont icon-shanchu"></i> 删除</a>
+					</p>
+				</li>
+
+			</ul>
+			  
+		</div><!--end list-app-box-->
+		   <!-- 加载提示符 -->
+          <div class="infinite-scroll-preloader">
+              <div class="preloader"></div>
+          </div>
+          
+	</div><!--end content -->
+    
+	<footer class="footer">
+		<a href="clerk-add.html" class="alink-btn"><i class="iconfont icon-jiahao1 f-red">新增店员</i></a>
+	</footer>
+	</div>
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script src="js/iscroll.js"></script>
+<script>
+
+$(function(){
+
+// 添加'refresh'监听器
+$(document).on('refresh', '.pull-to-refresh-content',function(e) {
+    // 模拟2s的加载过程
+    setTimeout(function() {
+        // 加载完毕需要重置
+        $.pullToRefreshDone('.pull-to-refresh-content');
+    }, 2000);
+});
+// 加载flag
+var loading = false;
+// 最多可加载的条目
+   var maxItems = 100;
+
+// 每次加载添加多少条目
+var itemsPerLoad = 20;
+
+//是否最后一条数据
+var isHasData = false;
+
+
+function addItems(number, lastIndex) {
+	// 生成新条目的HTML
+    maxItems ++;
+	var html = '';
+	for (var i = 0; i <= 5; i++) {
+      html += "<li><div class='crbox'>"+
+               "<span>小魔图</span><span>18823359549</span><span>非店长</span></div>"+
+			   "<p class='crbox bot'>"+
+			    " <a href='clerk-add.html'><i class='iconfont icon-xiugaishijian'></i> 修改</a>"+
+			    " <a href='javascript:void(0)' data-id='1882553662' class='delete-clerk'><i class='iconfont icon-shanchu'></i> 删除</a>"+
+				"</p></li>"
+                     
+	}
+	// 添加新条目
+	$('.infinite-scroll-bottom .clerkmanager-list').append(html);
+	
+}
+  //预先加载20条
+addItems(itemsPerLoad, 0);
+
+// 上次加载的序号
+
+var lastIndex = 20;
+
+// 注册'infinite'事件处理函数
+$(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+  // 如果正在加载，则退出
+  if (loading) return;
+
+  $(".infinite-scroll-preloader").removeClass("hide");
+  // 设置flag
+  loading = true;
+
+  // 模拟1s的加载过程
+  setTimeout(function() {
+	  // 重置加载flag
+	  loading = false;
+
+	  if (lastIndex >= maxItems) {
+		  // 加载完毕，则注销无限加载事件，以防不必要的加载
+		  $.detachInfiniteScroll($('.infinite-scroll'));
+		  // 删除加载提示符
+		 $('.infinite-scroll-preloader').remove();
+
+          
+
+		  return;
+	  }
+
+       // 添加新条目
+          addItems(itemsPerLoad, lastIndex);
+       // 更新最后加载的序号
+          lastIndex = $('.list-container li').length;
+       //容器发生改变,如果是js滚动，需要刷新滚动
+          $.refreshScroller();
+	  
+    }, 1000);
+   });
+
+	
+})
+	/*删除员工*/
+	function delClerk(obj){
+		var daId = $(obj).attr("data-id");
+	    $(obj).parent().parent().remove();
+	}
+	
+	$(document).on("click","a.delete-clerk",function(){
+		var parent = $(this).parents("li");
+		$.confirm('确定要删除商品吗？',
+			function () {
+				parent.addClass("scale0");
+				setTimeout(function(){parent.remove()},800);
+			 	$.toast("已删除成功",1000);
+			}
+		);
+	})
+
+</script>
+
+</body>
+</html>

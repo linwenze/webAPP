@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>搜索</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-apply-search">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<a class="icon pull-right f-white all-order-font-b" href="javascript:void(0);">搜索</a>
+		<h1 class="title">
+			<input type="text"  class="all-order-search-input" placeholder="请输入关键字" id="seachInput">
+		</h1>
+	</header>
+
+	<div class="content infinite-scroll infinite-scroll-bottom pull-to-refresh-content" data-ptr-distance="55" data-distance="50"> 
+	  	<!-- 默认的下拉刷新层 -->
+	    <div class="pull-to-refresh-layer">
+	        <div class="preloader"></div>
+	        <div class="pull-to-refresh-arrow"></div>
+	    </div>
+	    
+	    <!--goods-area start -->
+		<div class="goods-area footer-padding">
+        	<ul class="goods--list">
+            	<li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                    <div class="operate-link two-row-link">
+                    	<a class="editor-goods-link" href="item-add.html">编辑</a> <a class="putaway-goods-link">上架</a>
+                    </div>
+                </li>
+                
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                    <div class="operate-link two-row-link">
+                    	<a class="editor-goods-link" href="item-add.html">编辑</a> <a class="putaway-goods-link">上架</a>
+                    </div>
+                </li>
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                    <div class="operate-link two-row-link">
+                    	<a class="editor-goods-link" href="item-add.html">编辑</a> <a class="putaway-goods-link">上架</a>
+                    </div>
+                </li>
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                    <div class="operate-link two-row-link">
+                    	<a class="editor-goods-link" href="item-add.html">编辑</a> <a class="putaway-goods-link">上架</a>
+                    </div>
+                </li>
+            </ul>
+        </div><!--goods-area end -->
+        
+		
+	   <!-- 底部滚动，加载提示符 -->
+       <div class="infinite-scroll-preloader hide">
+           <div class="preloader"></div>
+       </div>
+       
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+// 加载flag
+var loading = false;
+// 最多可加载的条目,数据总条数
+var maxItems = 100;
+// 每次加载添加多少条目,每页数据条数
+var itemsPerLoad = 20;
+//上次加载的条数序号
+var lastIndex = itemsPerLoad;
+//预先加载20条
+addNewOrderItems(itemsPerLoad, 0);
+$(function () {
+  	// 注册'infinite'事件处理函数，到达底部滚动事件
+  	$(document).on('infinite', '.infinite-scroll-bottom',function() {
+		  $(".infinite-scroll-preloader").show();
+		  // 如果正在加载，则退出
+		  if (loading) return;
+		  // 设置flag
+		  loading = true;
+		  // 模拟1s的加载过程
+		  setTimeout(function() {
+		      // 重置加载flag
+		      loading = false;
+		      if (lastIndex >= maxItems) {
+		          // 加载完毕，则注销无限加载事件，以防不必要的加载
+		          $.detachInfiniteScroll($('.infinite-scroll'));
+		          // 删除加载提示符
+		          $('.infinite-scroll-preloader').remove();
+		          return;
+		      }
+		      //当前显示的标签tabId
+		      var showTabId = $(document).find(".tab.active").attr("id");
+		      var showTabIndex = $(document).find(".tab.active").attr("index");
+		      // 添加新条目
+		      addNewOrderItems(showTabId,showTabIndex,itemsPerLoad, lastIndex);
+		      // 更新最后加载的序号
+		      lastIndex = $('#'+showTabId+' ul').length;
+		      //容器发生改变,如果是js滚动，需要刷新滚动
+		      $.refreshScroller();
+		  }, 1000);
+  	});
+  
+	// 添加'refresh'监听器，下拉刷新事件
+	$(document).on('refresh', '.pull-to-refresh-content',function(e) {
+	    // 模拟2s的加载过程
+	    setTimeout(function() {
+	        //当前显示的标签tabId
+	     
+	       // 添加新条目
+	      addNewOrderItems(itemsPerLoad, lastIndex);
+	        // 加载完毕需要重置
+	        $.pullToRefreshDone('.pull-to-refresh-content');
+	    }, 2000);
+	});
+
+});
+
+function addNewOrderItems(tabId,tabIndex,number, lastIndex) {
+	
+//ajax 结构代码	
+/*	$.ajax({
+		type:"post",
+		url: 'shop.json',
+		dataType:"json",
+	    cache:false,
+	    success: function(data){
+	    //判断是否 为空
+	    if(typeof(data) != undefined){
+	   	  for(var i=0; i<data.data.length;i++){
+	   	   
+	       }   	  	
+	     }
+	   }
+	});*/
+	// 生成新条目的HTML
+              var $data ="<li class='li-block'>"+
+					    "<div class='goods-con'>"+
+                    	"<a href='goods-view.html' class='photo'><img src='ad/002.jpg'></a>"+
+                        " <div class='con'>"+
+                        "<a href='goods-view.html' class='name'><span>进口五彩缤纷水果味软糖</span> <em class='goods-state'>标准</em></a>"+
+                        "<p>¥20.00</p><p class='nub'><span>可售库存20</span> <span>实际库存20</span></p>"+
+                        "</div></div>"+
+                        "<div class='operate-link two-row-link'>"+
+                    	"<a class='editor-goods-link' href='item-add.html'>编辑</a> <a class='putaway-goods-link'>上架</a>"+
+                        "</div></li>";
+
+  // 添加新条目
+  $('.goods--list').append($data);
+}
+</script>
+</body>
+</html>

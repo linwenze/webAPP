@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>选择非关键属性</title>
+<link href="css/sm.css" rel="stylesheet">
+
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+	<header class="bar bar-nav red-bg header-no-border">
+		<a class="icon pull-left f-white back-prev-link" onclick="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">非关键属性</h1>
+	</header>
+
+	<div class="content">
+        <div class="goods-add-area footer-padding">
+            <div class="block-box">
+            	<div class="li-block-tit">颜色分类</div><!--end li-block-tit -->
+				<div class="size-choose">
+                    <ul class="ul-list con">
+                        <li><a>白色</a></li> <li><a>米白色</a></li> <li><a>超浅灰</a></li>
+                        <li><a>浅灰色</a></li> <li><a>深灰色</a></li> <li><a>灰色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                    </ul>
+                    <span class="linkmore iconfont icon-xiangxia1">&nbsp;</span>
+                </div><!--end size-choose -->
+            </div><!--end block-box -->
+            
+            <div class="block-box">
+            	<div class="li-block-tit">尺寸</div><!--end li-block-tit -->
+				<div class="size-choose">
+                    <ul class="ul-list con">
+                        <li><a>CL</a></li> <li><a>L</a></li> <li><a>XL</a></li> <li><a>XXL</a><li>
+                    </ul>
+                    <span class="linkmore iconfont icon-xiangxia1">&nbsp;</span>
+                </div><!--end size-choose -->
+            </div><!--end block-box -->
+            
+            
+            <div class="block-box">
+            	<div class="li-block-tit">颜色分类</div><!--end li-block-tit -->
+				<div class="size-choose">
+                    <ul class="ul-list con">
+                        <li><a>白色</a></li> <li><a>米白色</a></li> <li><a>超浅灰</a></li>
+                        <li><a>浅灰色</a></li> <li><a>深灰色</a></li> <li><a>灰色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                    </ul>
+                    <span class="linkmore iconfont icon-xiangxia1">&nbsp;</span>
+                </div><!--end size-choose -->
+            </div><!--end block-box -->
+            
+        </div><!--end goods-add-area -->
+        
+	</div><!--end content -->
+    
+    <footer class="footer">
+        <input name="" type="button" class="footer-all-but" value="确定">
+    </footer>
+    
+</div><!--end page -->
+
+
+
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+$(function(){
+	$(".size-choose li a").on("click",function(){
+		$(this).addClass("active");
+		$(this).parent().siblings().find("a").removeClass("active");
+	})
+	
+	sizeChoose(); $(document).resize(function(){sizeChoose();})//绑定属性打开收起事件
+})
+
+
+function sizeChoose(){
+	$(".size-choose").each(function(){
+		var linkBut = $(".linkmore",this);
+		if($("li",this).length > 9){
+			var con = $(".con",this);
+			var height = con.height();
+			var pad = parseInt($(".con",this).css("padding-top"));
+			var conHeight = $("li",this).outerHeight()*3 + pad;
+			con.height(conHeight);
+			
+			linkBut.on("click",function(){
+				if(con.height()==conHeight){
+					con.height(height);
+					$(this).removeClass("icon-xiangxia1").addClass("icon-xiangshang");
+				}else{
+					con.height(conHeight);
+					$(this).removeClass("icon-xiangshang").addClass("icon-xiangxia1");
+				}
+			})
+			
+		}else{
+			linkBut.css("color","#eee");
+		}
+	})
+}
+
+</script>
+
+
+
+
+
+</body>
+</html>

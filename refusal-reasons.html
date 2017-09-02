@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>拒绝原因</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-refusal-reasons">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">拒绝原因</h1>
+	</header>
+
+	<div class="content" > 
+		<div class="white-bg">
+			<div class="ui-border-b refusal-reasons-title all-order-font-m f-black">
+				<div class="padlr">
+					<span>拒绝原因&nbsp;&nbsp;</span>
+					<span class="all-order-font-zs f-m-gray"><i class="f-pink all-order-font-m">*</i>必填</span>
+				</div>
+			</div>
+			<div class="ui-border-b all-order-font-m f-black">
+				<textarea class="refusal-reasons-textarea all-order-font-s" placeholder="处理措施，限380字以内哦" maxlength="380" id="refusalReson"></textarea>
+			</div>
+		</div>
+		<p class="t-c refusal-reasons-p">
+			<a href="javascript:void(0);" class="refusal-reasons-btn red-bg all-order-font-zb f-white" id="submitData" onclick="submitData();">提交</a>
+		</p>
+		
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+//提交按钮
+function submitData(){
+	//refusalReson:拒绝原因
+  	if(isEmptyInputVal("refusalReson","请输入拒绝原因")){
+  		//$.toast("提交成功,请到“售后-已拒绝”中查看", 2000);
+  		layerOpen("提交成功,请到“售后-已拒绝”中查看");
+  		//window.location.href="allOrder-refund.html";
+  	}
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+</script>
+</body>
+</html>

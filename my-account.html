@@ -1,0 +1,91 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>我的账户</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:void(0);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<a href="withdraw-recorder.html" class="button button-link button-nav pull-right f-white">提现记录</a>
+		<h1 class="title f-white">我的账户</h1>
+	</header>
+	<div class="content hidden-scroll">
+    	<div class="list-app-box withdraw">
+
+			<ul>
+				<li>
+					<div  class="a-link crbox">
+						<span class="input-title-l">账户余额</span>
+						<p class="msg bigPading f-black fr">￥200.00</p>
+					</div>
+				</li><!--end -->
+				<li>
+					<div  class="a-link crbox">
+						<span class="input-title-l">可用金额</span>
+						<p class="msg bigPading f-black fr"> ￥200.00</p>
+					</div>
+				</li><!--end -->
+
+				<li>
+					<div  class="a-link crbox">
+						<span class="input-title-l">冻结金额</span>
+						<p class="msg bigPading f-black fr"> ￥200.00</p>
+					</div>
+				</li><!--end -->
+
+			</ul>
+
+			<p class="btn-p t-c ">
+				<input type="button" class="next-btn confirm" id="withdraw-btn" value="提现"/>
+			</p>
+
+
+		</div><!--end list-app-box-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+   $(function(){
+	   $("#remaining-sum").blur(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $(this).val(new Number(sum).toFixed(2));
+		   }else{
+			   $(this).val(new Number(0).toFixed(2));
+		   }
+	   }).keyup(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $("#withdraw-btn").removeAttr("disabled");
+		   }else{
+			   $("#withdraw-btn").attr("disabled","disabled");
+		   }
+	   });
+
+	   $("#withdraw-btn").click(function(){
+		   window.location.href="withdraw-next.html";
+	   });
+
+   })
+
+</script>
+
+</body>
+</html>

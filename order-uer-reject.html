@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>用户拒收</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-order-uer-reject">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">用户拒收</h1>
+	</header>
+
+	<div class="content" > 
+		<div class="ui-border-b order-logistics-input all-order-font-m f-gray"><span class="padlr">拒收原因</span></div>
+		<div class="white-bg">
+			<ul class="order-uer-ul">
+				<li><label class="input-radio"><input name="rejectReson" type="radio" value="0" checked="checked"><em>&nbsp;</em>配送超时</label></li>
+				<li><label class="input-radio"><input name="rejectReson" type="radio" value="1"><em>&nbsp;</em>买家临时改变主意</label></li>
+				<li><label class="input-radio"><input name="rejectReson" type="radio" value="2"><em>&nbsp;</em>联系不上买家</label></li>
+			</ul>
+		</div>
+		<a href="javascript:void(0);" class="all-order-one-btn t-c red-bg all-order-font-m f-white" id="submitData" onclick="submitData();">提交</a>
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+//提交按钮
+function submitData(){
+	//rejectReson:拒收原因
+	var rejectReson = $('[name="rejectReson"]:checked').val();
+	alert("拒收原因="+rejectReson);
+  	$.toast("提交成功", 2000);
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+</script>
+</body>
+</html>

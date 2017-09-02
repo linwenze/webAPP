@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>申请开店</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page" id="pay-password-one">
+	<header class="bar bar-nav red-bg">
+		<h1 class="title f-white">申请开店</h1>
+	</header>
+
+	<div class="content">
+    	<div class="list-app-box topno">
+			<ul>
+				<li>
+					<span class="input-title-l">手机号</span>
+					<input type="text" id="phone-nub" class="input-itxt input-code-pr" placeholder="请输入手机号码"/>
+					
+					<input name="" type="button" id="phone-code" class="apply-code-btn red-bg" value="获取验证码" >
+				</li>
+				<li>
+					<span class="input-title-l">验证码</span>
+					<input type="text" id="phone-check-code" class="input-itxt r" placeholder="请输入验证码"/>
+				</li>
+			</ul>
+			<p class="btn-p t-c">
+				<a href="shop-protocol.html" id="submit-login" class="next-btn red-bg f-white" >下一步</a>
+			</p>
+		</div><!--end list-block-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+	$("#phone-code").on("click",function(){
+		var val = $("#phone-nub").val();
+		if(val==""){
+			$.toast('请填写您的手机号码', 2000);
+		}else{
+			if(!phoneCheck(val)){
+				$.toast('请填写正确的手机号码', 2000);
+			}else{
+				phoneTime(this);
+				$.toast('验证码发送成功', 2000);
+			}
+		}
+	})
+	
+	//提交按钮点击状态切换
+	$("#phone-nub, #phone-check-code").on("input",function(){
+		var nVal = $("#phone-nub").val();
+		var cVal = $("#phone-check-code").val();
+		if(!cVal == "" && phoneCheck(nVal)){
+			$("#submit-login").removeAttr("disabled");
+		}else{
+			$("#submit-login").attr("disabled","disabled");
+		}
+	})
+	
+	//输入错误验证码
+	$("#submit-login").click(function(){
+		var cVal = $("#phone-check-code").val();
+		if(cVal != "1234"){
+			$.toast("请输入正确验证码",2000);
+			$("#submit-login").attr("disabled","disabled");
+		}
+		else{
+			alert("登录输入全部成功");
+		}
+	})
+	
+})
+//验证码倒计时
+var phoneWait=60;
+function phoneTime(o) {
+	if (phoneWait == 0) {
+		o.removeAttribute("disabled");	
+		o.value="重新获取";
+		phoneWait = 60;
+		
+	} else {
+		o.setAttribute("disabled", true);
+		o.value="重新发送(" + phoneWait + ")";
+		phoneWait--;
+		setTimeout(function(){phoneTime(o)},1000)
+	}
+}
+//正确手机号码验证
+function phoneCheck(phone){
+	return /^(13[0-9]|15[0-9]|147|17[0-9]|18[0-9])[0-9]{8}$/i.test(phone);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>提现</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw-request">
+	<header class="bar bar-nav red-bg draw">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:void(0);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">提现</h1>
+	</header>
+
+	<div class="content hidden-scroll">
+
+		<div class="with-draw red-bg ">
+			<p class="font f-white t-c">提现金额(元)</p>
+		    <p class="num f-white t-c">200.00</p>
+		</div><!--end with-draw-->
+
+    	<div class="list-app-box no-margin withdraw">
+			<input type="password" class="with-draw-input" id="pay-code" placeholder="请输入支付密码"/>
+			<p class="btn-p t-c m">
+				<a href="javascript:void(0);" class="next-btn confirm" onclick="submitData()" id="submitData">确定提现</a>
+			</p>
+			<p class="btn-p t-c m">
+				<input type="button" id="cancle-draw" class="next-btn cancle" value="取消提现"/>
+			</p>
+
+		</div><!--end list-app-box-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+//提交按钮
+function submitData(){
+	//pay-code：支付密码
+  	if(isEmptyInputVal("pay-code","请输入支付密码")){
+  		//输入不为空，则跳转
+		$.showPreloader('正在提交');
+		setTimeout(function () {
+			$.hidePreloader();
+		}, 2000);
+		window.location.href = "withdraw-detail.html";
+		/*$.ajax({
+			 type:"POST",
+			 url:$("#binkform").attr("action"),
+			 data:formdata,
+			 success:function(data){
+			 
+			 }
+		 });*/
+  	}
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val().trim() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+</script>
+
+</body>
+</html>

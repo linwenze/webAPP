@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>新建地址</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-address-add">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="address-select.html"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">新建地址</h1>
+	</header>
+
+	<div class="content" > 
+		<ul class="add-address-ul white-bg all-order-font-m">
+			<li class="ui-border-b">
+				<div class="address-add-content">
+					<span class="address-add-content-tip t-l f-black">收货人姓名</span>
+					<input type="text" class="address-add-input-text all-order-font-s t-r f-black" placeholder="请输入" id="receiverName">
+				</div>
+			</li>
+			<li class="ui-border-b">
+				<div class="address-add-content">
+					<span class="address-add-content-tip t-l f-black">手机号码</span>
+					<input type="text" class="address-add-input-text all-order-font-s t-r f-black" placeholder="请输入" id="receiverTel">
+				</div>
+			</li>
+			<li class="ui-border-b">
+				<div class="address-add-content">
+					<span class="address-add-content-tip t-l f-black">省，市，区</span>
+					<input type="text" class="address-add-input-text new-r all-order-font-s t-r f-black" placeholder="请选择" id='areaSelect' readonly="readonly">
+					<i class="iconfont icon-xiangyou address-add-input-arrow"></i>
+				</div>
+			</li>
+			<li class="ui-border-b">
+				<div class="address-add-content">
+					<span class="address-add-content-tip t-l f-black">详细地址</span>
+					<input type="text" class="address-add-input-text all-order-font-s t-r f-black" placeholder="请输入" id="detailAddress">
+				</div>
+			</li>
+		</ul>
+		<a href="javascript:void(0);" class="all-order-one-btn t-c red-bg all-order-font-m f-white" id="submitData" onclick="submitData();">确定</a>
+		
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/sm-city-picker.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+	//省市区
+	$("#areaSelect").cityPicker({
+	    toolbarTemplate: '<header class="bar bar-nav bar-picker">\
+	    <button class="button button-link pull-right close-picker picker-sure-btn f-gray">确定</button>\
+	    <h1 class="title">请选择省市区</h1>\
+	    </header>'
+  	});
+  	
+  	//电话号码 ，只能输入数字
+	$("#receiverTel").on("input",function(){
+		$(this).val($(this).val().replace(/[^\d]/g,''));
+	});
+})
+  
+//提交按钮
+function submitData(){
+	//receiverName:收货人,receiverTel：手机号码，areaInfo：所在地区，detailAddress:详细地址
+  	if(isEmptyInputVal("receiverName","请输入收货人") && isEmptyInputVal("receiverTel","请输入手机号码") && isEmptyInputVal("areaSelect","请选择省市区") && isEmptyInputVal("detailAddress","请输入详细地址")){
+  		var receiverTel = $("#receiverTel").val();
+  		//检查电话号码是否匹配
+  		if(isPhoneOrTell(receiverTel,"请输入正确手机号")){
+			//输入不为空，则跳转
+  			alert("提交");
+  		}
+  	}
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+
+var validateJson = {
+	"MobileOrTell":{"reg":"","tip":"手机(例：13568995400)"},
+	"Tell":{"reg":"^((\\+?86)|(\\(\\+86\\)))?\\d{3,4}-\\d{7,8}(-\\d{3,4})?$","tip":"国内电话号码，格式: 0755-6305222 或 021-8788882"},
+	"Phone":{"reg":"^((0{0,1})|(\\+?86)|(\\(\\+86\\)))(13[0-9]|15[0-9]|147|17[0-9]|18[0-9])[0-9]{8}$","tip":"输入合法手机号码"}
+};
+	
+//手机和固定座机电话一起校验
+function isPhoneOrTell(number,tip)
+{
+	var isMobile = new RegExp(validateJson.Phone.reg);
+	var isTell = new RegExp(validateJson.Tell.reg);
+	if(isMobile.test(number) || isTell.test(number))
+	{
+		 return true;	
+	}
+	else
+	{
+		$.toast(tip, 2000);
+		return false;
+	}
+}
+</script>
+</body>
+</html>

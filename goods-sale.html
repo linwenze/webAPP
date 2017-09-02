@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>商品-出售中</title>
+<link href="css/sm.css" rel="stylesheet">
+
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+	<header class="bar bar-nav red-bg header-no-border">
+		<a class="icon pull-left f-white back-prev-link" onclick="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+        <a class="icon pull-right f-white" id="goods-add-clould"><i class="iconfont icon-jiahao">&nbsp;</i></a>
+		<a class="icon pull-right f-white" href="goods-search.html"><i class="iconfont icon-iconfontsousuo1">&nbsp;</i></a>
+        
+		<h1 class="title f-white">商品</h1>
+	</header>
+
+	<ul class="ul-list classify-tab">
+        <li class="active"><a href="goods-sale.html">出售中(50)</a></li>
+        <li><a href="goods-warehouse.html">仓库中(50)</a></li>
+    </ul><!--end calssify-tab -->
+    
+	<div class="content">
+        <div class="goods-area footer-padding">
+        	<ul class="goods-list">
+            	<li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                    <div class="operate-link one-row-link">
+                    	<a class="soldout-goods-link">下架</a>
+                    </div>
+                </li>
+                
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/001.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">私有</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                     <div class="operate-link one-row-link">
+                    	<a class="soldout-goods-link">下架</a>
+                    </div>
+                </li>
+                
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/003.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">标准</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                     <div class="operate-link one-row-link">
+                    	<a class="soldout-goods-link">下架</a>
+                    </div>
+                </li>
+                
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/001.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">私有</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                     <div class="operate-link one-row-link">
+                    	<a class="soldout-goods-link">下架</a>
+                    </div>
+                </li>
+                
+                <li class="li-block">
+					<div class="goods-con">
+                    	<a href="goods-view.html" class="photo"><img src="ad/002.jpg"></a>
+                        <div class="con">
+                        	<a href="goods-view.html" class="name"><span>进口五彩缤纷水果味软糖</span> <em class="goods-state">私有</em></a>
+                            <p>¥20.00</p>
+                            <p class="nub"><span>可售库存20</span> <span>实际库存20</span></p>
+                        </div><!--end con -->
+                    </div><!--end goods-con -->
+                     <div class="operate-link one-row-link">
+                    	<a class="soldout-goods-link">下架</a>
+                    </div>
+                </li>
+            </ul>
+        </div><!--end goods-area -->
+        
+	</div><!--end content -->
+    
+    <footer class="footer footer-menu">
+        <ul class="ul-list">
+            <li><a href="allOrder.html"><i class="iconfont icon-wenjianjia">&nbsp;</i> <span>订单</span></a></li>
+            <li class="active"><a href="goods-sale.html"><i class="iconfont icon-gouwuche2">&nbsp;</i> <span>商品</span></a></li>
+            <li><a href="shop.html"><i class="iconfont icon-icondpmr1">&nbsp;</i> <span>店铺</span></a></li>
+        </ul>
+    </footer>
+    
+</div><!--end page -->
+
+
+
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+$(function(){
+	$("#goods-add-clould").on("click",function(){
+		var buttons1 = [
+			{
+			  text: '扫描条形码添加商品',
+			  color: "dark",
+			  onClick: function() {
+				alert("弹出摄像头")
+			  }
+			},
+			{
+			  text: '输入条形码添加商品',
+			  color: "dark",
+			  onClick: function() {
+				window.location.href="goods-code-import.html"
+			  }
+			}
+		];
+		var buttons2 = [
+			{
+			  text: '取消',
+			  color: "dark",
+			  bg: '#fff'
+			}
+		];
+		var groups = [buttons1, buttons2];
+			$.actions(groups);
+		})
+
+	$(document).on("click",".soldout-goods-link",function(){
+		var parent = $(this).parents("li");
+		$.confirm('确定要下架商品吗？',
+			function () {
+				parent.addClass("scale0");
+				setTimeout(function(){parent.remove()},800);
+			 	$.toast("已下架成功",1000);
+			}
+		);
+	})
+})
+</script>
+
+
+
+
+
+</body>
+</html>

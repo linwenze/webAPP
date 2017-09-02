@@ -1,0 +1,64 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>添加商品描述</title>
+<link href="css/sm.css" rel="stylesheet">
+
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+	<header class="bar bar-nav red-bg header-no-border">
+		<a class="icon pull-left f-white back-prev-link" onclick="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">商品描述</h1>
+	</header>
+
+	<div class="content">
+    	<div contenteditable="true" id="goods-editor-textarea"></div>
+	</div><!--end content -->
+    
+    <footer class="footer">
+        <div class="two-button">
+        	<input name="" type="button" class="usbut org-button" value="添加图片">
+            <input name="" type="button" class="usbut red-button" value="完成">
+        </div><!--end two-button -->
+    </footer>
+    
+</div><!--end page -->
+
+
+
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+$(function(){
+
+
+	$(".org-button").on("click",function(){
+		var con = '<img src="ad/b001.jpg">';
+		$("#goods-editor-textarea").append(con);
+	})
+})
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>

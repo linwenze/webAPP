@@ -1,0 +1,72 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>店铺协议</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="page-goods-list">
+	<header class="bar bar-nav red-bg">
+		<h1 class="title f-white">店铺协议</h1>
+	</header>
+
+	<div class="content protocol-main hidden-scroll">
+	
+		<div class="protocol-title white-bg"> “云上城”平台服务条款</div>
+    	<div class="protocol-content white-bg">
+    		  <div class="protocol-main-pad  hidden-scroll">
+    		<p class="protocol-p-h1 f-m-gray">一、申请条件：</p>
+			<p>申请使用服务的商户必须同时满足以下条件：<br/>
+（一）  持有中华人民共和国合法营业执照;<br/>
+（二）  确认接受本协议及《“云上城”运营合作协议》，注册成为“云上城”用户并开通“云上城”账户；<br/>
+（三）  提交了本协议约定的相关证明文件并获得“云上城”平台认可；</p>
+<p class="protocol-p-h1 f-m-gray">二、平台申请证明文件提交及入驻：</p>
+<p>
+（一） 证明文件提交：商户欲使用本协议服务，必须向“云上城”或“云上城”指定合作方提交其在申请服务时提供信息的相关证明。具体证明信息内容如下： <br/>
+      1)营业执照副本复印件；<br/>
+      2)税务登记证复印件；<br/>
+      3)法人身份证复印件； <br/>
+      4)其他“云上城”认为需查验的信息。（根据商户经营类别的不同查验不同的信息） ；<br/>
+（二） 入驻：接受本协议开通“云上城”平台帐号，证明文件提交并审核即可入驻“云上城”平台。<br/>
+（三） 信息变更的通知：协议期内，上述信息（包括相关证明文件）的任何变更，商户都应及时通知“云上城”，如上述信息变更后使得商户不再具备履行本协议的情形出现时，“云上城”有权立即终止或中止本协议。 <br/>
+（四）  责任条款：商户同意为其未及时的通知或更新其信息承担全部责任，商户保证其向“云上城”提供的全部证明文件真实、准确且不存在超过时效问题（即保证所有证 明文件在整个合同履行期间处于有效期内）如因上述原因发生纠纷或被相关国家主管机关处罚，商户应当独立承担全部责任，如给“云上城”（包括其合作伙伴、代 理人、职员等）造成损失的，商户同意赔偿其全部损失。</p>
+		<p class="protocol-p-h1 f-m-gray">三、商户的声明及保证</p>
+		<p>（一）其符合商户的申请条件，且向“云上城”提供真实、合法、准确、有效的注册资料，并保证其诸如电子</p>
+    	  </div>
+    	</div><!--protocol-content-->
+    	
+	</div><!--end content -->
+    <div class="shop-protocol-btn">阅读并同意</div>
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+	var h1=$(window).height();
+	var h2=$('.bar-nav').height();
+	var h3=$('.protocol-title').height();
+	var h4=h1-h2-h3-110;
+	$('.protocol-content').height(h4);
+	$('.shop-protocol-btn').click(function(){
+		goto();
+	})
+	})	
+function  goto(){
+	window.location="shop-information.html";
+}
+</script>
+</body>
+</html>

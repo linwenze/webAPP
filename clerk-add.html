@@ -1,0 +1,186 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>新增店员</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="clerk-add">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">新增店员</h1>
+	</header>
+
+	<div class="content hidden-scroll list-app-content">
+		<form action=""  >
+		<input type="hidden" id="idcard"> <!-- 选择身份  -->
+		<input type="hidden" id="loginsys"> <!-- 可登录的系统 -->
+		<div class="list-app-top-box white-bg">
+			<p class="all-order-font-m list-app-top-title">选择身份<i class="f-red">*</i> </p>
+			<ul class="rows list-app-ul" id="select-idcard">
+				<li class="cols">店长</li>
+				<li class="cols">员工</li>
+			</ul>
+		</div>
+    	<div class="list-app-box no-margin">
+			<ul>
+				<li class="has-margin">
+					<span class="input-title-l">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 <i class="f-red">*</i></span>
+					<input type="text" class="input-itxt rr newpr t-r" id="clerkname" placeholder="请输入" maxlength="50" />
+				</li><!--end -->
+				<li>
+					<span class="input-title-l">联系电话 <i class="f-red">*</i></span>
+					<input type="text" class="input-itxt rr newpr t-r" id="account" placeholder="请输入" maxlength="50"/>
+				</li><!--end -->
+				<li class="noborbot">
+					<span class="input-title-l">登录密码 <i class="f-red">*</i></span>
+					<input type="password" class="input-itxt rr newpr t-r" id="password" placeholder="请输入" maxlength="50"/>
+					<a href="javascript:void(0);" id="yan-icon" class="yan-icon-a"><i class="yan-icon"></i></a>
+				</li><!--end -->
+			</ul>
+		</div><!--end list-app-box-->
+		<div class="list-app-top-box">
+			<p class="all-order-font-m list-app-top-title">可登录的系统 <i class="f-red">*</i> </p>
+			<ul class="rows list-app-ul new" id="select-loginsys">
+				<li class="cols new">POS机</li>
+				<li class="cols new">商家app</li>
+				<li class="cols new">商家中心</li>
+			</ul>
+		</div>
+		<div class="t-c refund-price-content">
+			<a href="javascript:void(0);" class="t-c fr f-white refund-price-btn new red-bg" onclick="submitData()" id="submitData">确定</a>
+		</div>
+		</form><!--end form-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+addClerkWindow()
+//新增店员弹窗
+function addClerkWindow(){
+	$.modal({
+	  title: '新增店员账号成功，',
+	  text:'是否继续新增？',
+	  buttons: [
+	    {
+	      text: '返回查看',
+	      onClick: function() {
+		      
+	      }
+	    },
+	    {
+	      text: '继续添加',
+	      onClick: function() {
+	      	
+	      }
+	    }
+	  ]
+    });
+}
+
+$(function(){
+	$("#yan-icon").click(function(){
+		var type = $("#password").attr("type");
+		if(type == "password"){
+			$("#password").attr("type","text");
+		}else if(type == "text"){
+			$("#password").attr("type","password");
+		}
+	});
+	
+	/*选择身份*/
+	$("#select-idcard li").click(function(){
+		$(this).addClass("active").siblings().removeClass("active");
+	});
+	
+	/*可登录的系统 */
+	$("#select-loginsys li").click(function(){
+		$(this).addClass("active");
+	});
+	
+});
+
+//提交按钮
+function submitData(){
+	var idcard = $("#select-idcard li.active").text() == null ? "" : $("#select-idcard li.active").text();//选择身份
+	var loginsys = $("#select-loginsys li.active").text() == null ? "" : $("#select-loginsys li.active").text(); //可登录的系统
+	$("#idcard").val(idcard); //选择身份
+	$("#loginsys").val(loginsys); //可登录的系统
+	//idcard：选择身份，clerkname:姓名,account：联系号码，password：登录密码，loginsys:可登录的系统
+  	if(isEmptyInputVal("idcard","请选择身份") && isEmptyInputVal("clerkname","请输入姓名") && isEmptyInputVal("account","请输入联系号码") && isEmptyInputVal("password","请输入登录密码") && isEmptyInputVal("loginsys","请选择可登录的系统")){
+  		var account = $("#account").val();
+  		//检查电话号码是否匹配
+  		if(isPhoneOrTell(account,"请输入正确手机号")){
+		    //输入不为空，则跳转
+  			$.showPreloader('正在提交');
+			setTimeout(function () {
+				$.hidePreloader();
+			}, 2000);
+
+			/*$.ajax({
+				 type:"POST",
+				 url:$("#binkform").attr("action"),
+				 data:formdata,
+				 success:function(data){
+				 
+				 }
+			 });*/
+  		}
+  	}
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val().trim() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+
+var validateJson = {
+	"MobileOrTell":{"reg":"","tip":"手机(例：13568995400)"},
+	"Tell":{"reg":"^((\\+?86)|(\\(\\+86\\)))?\\d{3,4}-\\d{7,8}(-\\d{3,4})?$","tip":"国内电话号码，格式: 0755-6305222 或 021-8788882"},
+	"Phone":{"reg":"^((0{0,1})|(\\+?86)|(\\(\\+86\\)))(13[0-9]|15[0-9]|147|17[0-9]|18[0-9])[0-9]{8}$","tip":"输入合法手机号码"}
+};
+	
+//手机和固定座机电话一起校验
+function isPhoneOrTell(number,tip)
+{
+	var isMobile = new RegExp(validateJson.Phone.reg);
+	var isTell = new RegExp(validateJson.Tell.reg);
+	if(isMobile.test(number) || isTell.test(number))
+	{
+		 return true;	
+	}
+	else
+	{
+		$.toast(tip, 2000);
+		return false;
+	}
+}
+</script>
+
+</body>
+</html>

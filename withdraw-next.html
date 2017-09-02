@@ -1,0 +1,121 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>提现下一步</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">提现</h1>
+	</header>
+	<div class="content hidden-scroll">
+
+    	<div class="list-app-box  withdraw">
+			<ul>
+				<li>
+					<a href="javascript:void(0)" id="select-bank" class="a-link ">
+						<span class="input-title-l">银行卡</span>
+						<p class="msg bigPading f-black "> 中国银行（2563）</p>
+						<i class="iconfont icon-xiangyou r"></i>
+					</a>
+				</li><!--end -->
+
+				<!--<li>
+					<div  class="a-link ">
+						<span class="input-title-l">提现金额</span>
+						<p class="msg bigPading f-black "> <span class="with-r-bor">当余额200元</span> </p>
+					</div>
+				</li>-->
+				<li>
+					<span class="input-title-l has-border-draw">提现金额</span>
+					<input type="text" class="input-itxt r with-num blackholer" id="withdraw-money" placeholder="当前余额200.00元" value="" />
+				</li>
+
+			</ul>
+
+			<p class="btn-p t-c">
+				<input type="button" class="next-btn red-bg f-white" id="withdraw-nextbtn" value="下一步"/>
+			</p>
+
+
+		</div><!--end list-app-box-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+	$(function(){
+
+		$("#select-bank").click(function(){
+		var binkmodel =  $.modal({
+				extraClass:"bink-select",
+				afterText:"<div>"+
+								"<p class='t-r'><a href='javascript:closeModal()' class='f-red'>取消</a></p>"+
+								"<p class='tit1 first'>选择银行卡</p>"+
+								"<ul class='hidden-scroll binkselect'>"+
+									"<li onclick='selebink(this)'>招商银行(1258)</li>"+
+									"<li onclick='selebink(this)'>民生银行(5968)</li>"+
+									"<li class='selected' onclick='selebink(this)'>工商银行(8547)</li>"+
+									"<li onclick='selebink(this)'>工商银行(8547)</li>"+
+									"<li onclick='selebink(this)'>工商银行(8547)</li>"+
+									"<li onclick='selebink(this)'>工商银行(8547)</li>"+
+								"</ul>"+
+								"<p class='tit1' onclick=''>绑定新银行卡</p>"+
+							"</div>"
+			});
+
+		});
+
+		$("#withdraw-money").blur(function(){
+			var sum = $(this).val();
+			if(!isNaN(sum) && sum > 0){
+				$(this).val(new Number(sum).toFixed(2));
+			}else{
+				$(this).val(new Number(0).toFixed(2));
+			}
+		}).keyup(function(){
+			var sum = $(this).val();
+			if(!isNaN(sum) && sum > 0){
+				$("#withdraw-nextbtn").removeAttr("disabled");
+			}else{
+				$("#withdraw-nextbtn").attr("disabled","disabled");
+			}
+		});
+
+		$("#withdraw-nextbtn").click(function(){
+			window.location.href= "withdraw-request.html";
+		})
+	});
+
+	/*银行卡切换*/
+	function selebink(obj){
+		$(obj).addClass("selected").siblings().removeClass("selected");
+		var bangname = $(obj).text();
+		$("#select-bank").children(".bigPading").text(bangname);
+		closeModal();
+	}
+
+    /*关闭model*/
+	function closeModal(){
+		$.closeModal();
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>店铺信息</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="show-infomation">
+	<header class="bar bar-nav red-bg" id="show-infomation-header-one">
+		<h1 class="title f-white">店铺信息</h1>
+	</header>
+
+	<div class="content shop-infomation" id="show-photos-check">
+    
+		<div class="list-app-box ">
+			<ul>
+				
+				<li>
+					<div class="list-box-titles">门店照<i class="f-gray">(最多上传5张照片)</i><i class="pun-bt f-red">*</i></div>
+					<div class="list-box-img">
+					<div id="shop-pic" class="list-box-pic crbox">
+						
+					<div class="addfilebtn add-img fl"><p>添加</p><p>图片</p></div></div>
+					</div>
+						
+				</li>
+			</ul>
+			
+		</div><!--end list-block-->
+		<div class="list-app-conner crbox">
+			<ul>
+				<li>
+				  <div class="list-app-items">
+					<div class="list-box-titles">营业执照<i class="pun-bt f-red">*</i></div>
+					<div class="list-box-img">
+					<div id="shop-trade-pic" class="list-conner-pic"></div>
+					<div class="addfilebtn add-img "><p>添加</p><p>图片</p></div></div>
+				   </div>
+				</li>
+				<li>
+					<div class="list-box-titles">手持身份证正面<i class="pun-bt f-red">*</i></div>
+					<div class="list-box-img"><div id="shop-sff-pic" class="list-conner-pic"></div>
+					<div class="addfilebtn add-img "><p>添加</p><p>图片</p></div></div>
+				</li>
+			</ul>
+			
+		</div><!--end list-block-->
+		<div class="list-app-conner crbox">
+			<ul>
+				<li>
+			       <div class="list-app-items">
+					<div class="list-box-titles">身份证正面照<i class="pun-bt f-red">*</i></div>
+					<div class="list-box-img">
+					<div id="shop-sfz-pic" class="list-conner-pic"></div>
+					<div class="addfilebtn add-img "><p>添加</p><p>图片</p></div></div>
+				   </div>
+				</li>
+				<li>
+					<div class="list-box-titles">身份证反面照<i class="pun-bt f-red">*</i></div>
+					<div class="list-box-img"><div id="shop-sfo-pic" class="list-conner-pic"></div>
+					<div class="addfilebtn add-img "><p>添加</p><p>图片</p></div></div>
+				</li>
+			</ul>
+			
+		</div><!--end list-block-->
+		
+		<p class="btn-p t-c">
+				<a href="#" onclick="submitpic();" class="next-btn red-bg f-white">下一步</a>
+			</p>
+	</div><!--end content -->
+	<div class="picker-shadow" ></div>
+
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+  //图片添加
+  $('.list-app-conner .addfilebtn').click(function(){
+  	 $(this).prev('.list-conner-pic').append("<img src='images/pic.jpg' alt=''>");
+  	 $(this).hide();
+  })
+    
+  	 $('.list-box-pic .addfilebtn').click(function(){
+  	    pictj()
+  	   $(this).before("<img src='images/pic.jpg' alt=''>");
+      
+      })
+})
+ //图片限制js
+function pictj(){
+	var picnum = $('#shop-pic img').length;
+	if(picnum>=4){
+		$('.list-box-pic .addfilebtn').hide();
+			$.toast("最多添加5张图片", 2000);
+	   }
+	else{
+	  return picnum;
+	}
+}
+ //提交按钮
+function submitpic(){
+	//shop-pic:请输入店铺名称
+  	if(isEmptypic("shop-pic","请上传门店照片，至少一张")&&isEmptypic("shop-trade-pic","请上传营业照片")&&isEmptypic("shop-sff-pic","请上传手持身份证正面照片")&&isEmptypic("shop-sfz-pic","请上身份证正面照")&&isEmptypic("shop-sfo-pic","请上身份证反面照")){
+      	window.location="shop-information-sumit.html";
+  	}
+  
+}
+
+//判断输入是否存上传门店照片
+function isEmptypic(id,tip){
+	var flag = true;
+	
+	if($("#"+id).find('img').length<=0){
+		
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+</script>
+</body>
+</html>

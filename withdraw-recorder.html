@@ -1,0 +1,73 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>提现记录</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw-recorder">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">提现记录</h1>
+	</header>
+
+	<div class="content hidden-scroll">
+    	<div class="list-app-box withdraw no-margin">
+			<ul>
+				<li class="record-item" data-id="2d3109877462">
+					<p class="crbox t-l tit f-black">提现 <span class="fr">-250.00</span></p>
+					<p class="crbox t-l tim f-gray">2015-05-12 13:12:14  <span class="f-orange fr">等待</span> </p>
+				</li><!--end -->
+
+				<li class="record-item" data-id="2d3109877462">
+					<p class="crbox t-l tit f-black">提现 <span class="fr">-250.00</span></p>
+					<p class="crbox t-l tim f-gray">2015-05-12 13:12:14  <span class="f-orange fr">审核中</span> </p>
+				</li><!--end -->
+
+				<li class="record-item" data-id="2d3109877462">
+					<p class="crbox t-l tit f-black">提现 <span class="fr">-250.00</span></p>
+					<p class="crbox t-l tim f-gray">2015-05-12 13:12:14  <span class="f-orange fr">审核不通过</span> </p>
+				</li><!--end -->
+
+				<li class="record-item" data-id="2d3109877462">
+					<p class="crbox t-l tit f-black">提现 <span class="fr">-250.00</span></p>
+					<p class="crbox t-l tim f-gray">2015-05-12 13:12:14  <span class="f-orange fr">审核通过</span> </p>
+				</li><!--end -->
+
+				<li class="record-item" data-id="2d3109877462">
+					<p class="crbox t-l tit f-black">提现 <span class="fr">-250.00</span></p>
+					<p class="crbox t-l tim f-gray">2015-05-12 13:12:14  <span class="f-orange fr">审核通过</span> </p>
+				</li><!--end -->
+
+
+			</ul>
+
+		</div><!--end list-app-box-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+	$(document).on("click",".record-item",function(){
+		var dataid = $(this).attr("data-id");//获取参数
+		window.location.href = "withdraw-mssage.html?dataId="+dataid;
+	});
+</script>
+
+</body>
+</html>

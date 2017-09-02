@@ -1,0 +1,175 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>绑定银行卡</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="bank-bind">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">绑定银行卡</h1>
+	</header>
+
+	<div class="content hidden-scroll">
+		<form action="" id="binkform" >
+			<div class="list-app-box withdraw no-margin">
+				<ul>
+					<li class="line-msg">
+						<p>请绑定持卡人本人的银行卡</p>
+					</li>
+					<li>
+						<span class="input-title-l has-border"> <i class="black-star">*</i> 银行名称</span>
+						<input type="text" class="input-itxt r bind-bank" id="bankname" placeholder="请输入你要提现的银行名称" value="" maxlength="20" />
+					</li>
+					<li>
+						<span class="input-title-l has-border"> <i class="black-star">*</i> 银行卡号</span>
+						<input type="text" class="input-itxt r bind-bank" id="banknum" placeholder="请输入银行卡号" value="" maxlength="50"/>
+					</li>
+					<li>
+						<span class="input-title-l has-border"> <i class="black-star">*</i> 持卡人</span>
+						<input type="text" class="input-itxt r bind-bank" id="bankower" placeholder="请输入银行卡持有人姓名" value="" maxlength="20" />
+					</li>
+					<li class="line-msg">
+						<p>请完善开户行信息</p>
+					</li>
+					<li>
+						<span class="input-title-l "> <i class="black-star">*</i> </span>
+						<input type="text" class="input-itxt l bind-bank blackholer" placeholder="请选择开户行的省/市/区" id="bankaddress" value="" readonly="readonly" />
+						<i class="iconfont icon-xiangyou input-right-icon f-gray"></i>
+					</li>
+					<li>
+						<span class="input-title-l has-border">  开户行</span>
+						<input type="text" class="input-itxt r bind-bank" id="bankopen" placeholder="请输入您的开户行名称" value="" />
+					</li>
+					<li>
+						<span class="input-title-l has-border">  开户行地址</span>
+						<input type="text" class="input-itxt r bind-bank" id="bankopenaddress" placeholder="请输入您的开户行地址(选填)" value="" />
+					</li>
+					<li class="line-msg noborbot">
+						<p>注意：</p>
+						<p class="all-order-font-s">1.提款银行卡持有人姓名必须与店铺持有人姓名或公司名称一致，否则提款失败</p>
+					</li>
+				</ul>
+
+				<p class="btn-p t-c">
+					<input type="button" id="bind-btn" class="next-btn red-bg f-white" value="绑定" />
+				</p>
+
+			</div><!--end list-app-box-->
+		</form><!--end form-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/sm-city-picker.js"></script>
+<script src="js/all.js"></script>
+<script>
+	$(function(){
+		//省市区
+		$("#bankaddress").cityPicker({
+			toolbarTemplate: '<header class="bar bar-nav bar-picker">\
+								<button class="button button-link pull-right close-picker picker-sure-btn f-gray">确定</button>\
+								<h1 class="title">请选择省市区</h1>\
+								</header>',
+			onClose:function(){ //关闭组件时判断是否显示*
+				var _this = this;
+				var addressValue = $(_this.input).val();
+				if(addressValue.trim().length  > 0){
+					$(_this.input).parent().find(".black-star").text("");
+				}else{
+					$(_this.input).parent().find(".black-star").text("*");
+				}
+			}
+		});
+
+		//提交数据
+		$("#bind-btn").click(function(){
+			var formdata = {
+				bankname:$("#bankname").val(),
+				banknum:$("#banknum").val(),
+				bankower:$("#bankower").val(),
+				bankaddress:$("#bankaddress").val(),
+				bankopen:$("#bankopen").val(),
+				bankopenaddress:$("#bankopenaddress").val()
+			};
+
+			$.modal({
+				title:  '绑定成功，是否继续绑定',
+				buttons: [
+					{
+						text: '返回',
+						onClick: function() {
+							$.alert('你点击了返回')
+						}
+					},
+					{
+						text: '继续',
+						onClick: function() {
+							$.alert('你点击了继续')
+						}
+					}
+				]
+			});
+
+			/*if(check()){
+				/!*$.showPreloader('正在提交');
+				setTimeout(function () {
+				 $.hidePreloader();
+				}, 2000);*!/
+				/!*$.ajax({
+					type:"POST",
+					url:$("#binkform").attr("action"),
+					data:formdata,
+					success:function(data){
+					}
+				});*!/
+
+			}*/
+		});
+
+	});
+	/*表单检验*/
+	function check(){
+		var bankname = $("#bankname").val(); // 银行名称
+		if(bankname.trim().length < 1 ){
+			$.toast("银行名称不能为空");
+			return false;
+		}
+		var banknum = $("#banknum").val(); // 银行卡号
+		if(banknum.trim().length < 1 ){
+			$.toast("账号不能为空");
+			return false;
+		}
+		var bankower = $("#bankower").val(); // 持有人姓名
+		if(bankower.trim().length < 1 ){
+			$.toast("持有人姓名不能为空");
+			return false;
+		}
+		var bankaddress = $("#bankaddress").val(); // 省市区
+		if(bankaddress.trim().length < 1 ){
+			$.toast("省市区地址不能为空");
+			return false;
+		}
+		return true;
+	}
+
+
+</script>
+
+
+</body>
+</html>

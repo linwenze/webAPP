@@ -1,0 +1,75 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>提现明细</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw-mssage">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">提现详情</h1>
+	</header>
+	<div class="content white-bg">
+		<div class="withmsg-title">
+			<p class="type">支出</p>
+			<p class="money">100.00元</p>
+			<p class="state f-orange t-r">等待审核</p>
+		</div>
+		<div class="withmsg-content">
+			<p><span>流水号:</span>     <span>6522225554555555585455555</span></p>
+			<p><span>类型:</span>       <span>提现</span></p>
+			<p><span>提现银行:</span>   <span>工商银行</span></p>
+			<p><span>银行账户:</span>   <span>6522 001* **** ***4588</span></p>
+			<p><span>时间:</span>      <span>2015-07-03 09:05:12</span></p>
+			<p><span>备注:</span>      <span class="remark">不知道什么时候不知道什么时候不知道什么时候不知道
+				什么时候不知道什么时候不知道什么时候不知道什么时候</span></p>
+		</div>
+
+
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+   $(function(){
+	   $("#remaining-sum").blur(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $(this).val(new Number(sum).toFixed(2));
+		   }else{
+			   $(this).val(new Number(0).toFixed(2));
+		   }
+	   }).keyup(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $("#withdraw-btn").removeAttr("disabled");
+		   }else{
+			   $("#withdraw-btn").attr("disabled","disabled");
+		   }
+	   });
+
+	   $("#withdraw-btn").click(function(){
+		   window.location.href="withdraw-request.html";
+	   });
+
+   })
+
+</script>
+
+</body>
+</html>

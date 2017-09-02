@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<title>店铺信息</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+<!-- 操作地图的js --> 
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4SX8yWh8bj3Fi6eGLUbK2jYh"></script>
+</head>
+<body>
+<div class="page" id="page-picker">
+	<header class="bar bar-nav red-bg">
+		<h1 class="title f-white">店铺信息</h1>
+	</header>
+
+
+	<div class="content shop-infomation">
+    	<div class="list-app-box topno">
+			<ul>
+				<li>
+					<span class="input-title-left">开始时间<i class="pun-bt f-red">*</i></span>
+					<input type="text" class="input-itxtp input-icon t-r picker-trade-time" id="picker-trade-starttime" placeholder="09:00" readonly/>
+					<i class="iconfont icon-xiangyou icon-r "></i>
+				</li>
+				<li>
+					<span class="input-title-left">结束时间<i class="pun-bt f-red">*</i></span>
+					<input type="text" class="input-itxtp input-icon t-r picker-trade-time" id="picker-trade-endtime" placeholder="23:00" readonly/>
+					<i class="iconfont icon-xiangyou icon-r "></i>
+				</li>
+				
+			</ul>
+			
+		</div><!--end list-block-->
+		<div class="list-app-box">
+			<ul>
+			
+				<li>
+					<span class="lable-title">消息声音提醒</span>
+			           <span class="lable-check">
+			             <label class="input-checkbox fr">
+                    	 <input type="checkbox" id="messageRemind"> <div><i>&nbsp;</i> <span>关</span> <span>开</span></div>
+                         </label>
+		              </span>
+				</li>
+			</ul>
+			
+		</div><!--end list-block-->
+		<p class="btn-p t-c">
+				<a href="#" onclick="Submitbtn();" class=" next-btn red-bg f-white">提交</a>
+			</p>
+	</div><!--end content -->
+	
+    <div class="picker-shadow"></div>
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+//选择送货时间
+ $(function(){
+	//时间插件和阴影层
+     $('#picker-trade-starttime').click(function() {
+        $('.picker-shadow').show();
+    });
+     $('#picker-trade-endtime').click(function() {
+        $('.picker-shadow').show();
+    });
+	$('.close-picker').live('click',function() {
+		$('.picker-shadow').hide();
+		})
+	$('.picker-calendar-day').live('click',function() {
+		$('.picker-shadow').hide();
+		})
+	$('.picker-shadow').click(function(){
+		$('.picker-shadow').hide();
+	})
+	  //营业开始时间
+       $("#picker-trade-starttime").datetimePickerSet({
+         toolbarTemplate: '<footer class="bar bar-footer bar-nav">\
+        <span class="picker-cancel button fl close-picker">\
+      取消\
+      </span>\
+      <span class="picker-sure button fr close-picker">\
+      确定\
+      </span>\
+      <div class="title picker-title">开始时间</div>\
+      </footer>',
+	  });
+	  //营业结束时间
+	  $("#picker-trade-endtime").datetimePickerSet({
+	    toolbarTemplate: '<footer class="bar bar-footer bar-nav">\
+        <span class="picker-cancel button fl close-picker">\
+      取消\
+      </span>\
+      <span class="picker-sure button fr close-picker">\
+      确定\
+      </span>\
+      <div class="title picker-title">请选择结束时间</div>\
+      </footer>',
+	  });
+
+})
+ function Submitbtn(){
+ 		var messageRemind = $("#messageRemind").is(":checked")
+		alert("消息声音提醒："+messageRemind);
+     	if(isEmptyInputVal("picker-trade-starttime","请输入开始时间")&&isEmptyInputVal("picker-trade-endtime","请输入结束时间")){
+     		
+     	window.location="index.html";
+     		
+     	}
+     	
+     	
+     }
+ //判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val() == ""){
+		flag = false;
+		/*layer.open({
+			content: tip,
+			style: 'background: #000;opacity: 0.8;color: #F9F7F7;',
+			time: 1
+		});*/
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>消息</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="message-detail">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">消息</h1>
+	</header>
+
+	<div class="content pull-to-refresh-content infinite-scroll infinite-scroll-bottom" data-ptr-distance="55" data-distance="50">
+		<!-- 默认的下拉刷新层 -->
+			    <div class="pull-to-refresh-layer">
+			        <div class="preloader"></div>
+			        <div class="pull-to-refresh-arrow"></div>
+			    </div>
+		<div class="list-app-box no-margin">
+			<ul>
+				<li>
+					<a href="message-detail.html" class="a-link">
+						<i class="iconfont icon-img icon-big news-official l"></i>
+						<div class="msg-box">
+							<p class="m-title f-black crbox">官方推送信息 <span class="m-subtitle f-red fr">未读</span></p>
+							<p class="m-content f-gray ui-nowrap"> 内容：尊敬的用户，您有物业费用未缴。</p>
+							<p class="m-time f-gray">2015-04-06 14:45</p>
+						</div>
+					</a>
+				</li><!--end 我的账号-->
+
+				<li>
+					<a href="message-detail.html" class="a-link">
+						<i class="iconfont icon-img icon-big news-notice l"></i>
+						<div class="msg-box">
+							<p class="m-title f-black crbox">通知消息 <span class="m-subtitle f-red fr">未读</span></p>
+							<p class="m-content f-gray ui-nowrap"> 内容：尊敬的用户，您有物业费用未缴您有物业费用未缴您有物业费用未缴您有物业费用未缴。</p>
+							<p class="m-time f-gray">2015-04-06 14:45</p>
+						</div>
+					</a>
+				</li><!--end 店铺统计-->
+
+				<li>
+					<a href="message-detail.html" class="a-link">
+						<i class="iconfont icon-img icon-big news-notice l"></i>
+						<div class="msg-box">
+							<p class="m-title f-black crbox">通知消息 <span class="m-subtitle f-red fr">未读</span></p>
+							<p class="m-content f-gray ui-nowrap"> 内容：尊敬的用户，您有物业费用未缴。</p>
+							<p class="m-time f-gray">2015-04-06 14:45</p>
+						</div>
+					</a>
+				</li><!--end 员工管理-->
+
+		</div><!--end list-app-box-->
+          <!-- 加载提示符 -->
+          <div class="infinite-scroll-preloader">
+              <div class="preloader"></div>
+          </div>
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+</body>
+</html>

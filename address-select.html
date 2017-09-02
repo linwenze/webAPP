@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>同意退货</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-address-select">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<a class="icon pull-right f-white" href="address-add.html"><span class="all-order-font-zs address-select-addbtn">添加地址</span></a>
+		<h1 class="title f-white">同意退货</h1>
+	</header>
+
+	<div class="content" > 
+		<input type="hidden" id="selectAddressName">
+		<input type="hidden" id="selectAddressTel">
+		<input type="hidden" id="selectAddressInfo">
+		<ul class="add-address-ul white-bg all-order-font-m">
+			<li class="ui-border-b">
+				<div class="address-add-content padlr f-black">请选择商品退回的地址</div>
+			</li>
+			<li class="ui-border-b">
+				<div class="rows-m address-select-li">
+					<div class="cols cols-85">
+						<p class="f-black word-break">黄绍伟</p>
+						<p class="all-order-font-s f-m-gray address-select-mt2">13435484848</p>
+						<p class="all-order-font-s f-m-gray word-break">东莞市东城区关张路俯身大厦306东莞市东城区关张路俯身大厦306</p>
+					</div>
+					<div class="cols t-r">
+						<i class="iconfont icon-duigou f-red address-select-gou fw none">&nbsp;</i>
+					</div>
+				</div>
+			</li>
+			<li class="ui-border-b">
+				<div class="rows-m address-select-li">
+					<div class="cols cols-85">
+						<p class="f-black word-break">黄绍伟ha</p>
+						<p class="all-order-font-s f-m-gray address-select-mt2">13435484849</p>
+						<p class="all-order-font-s f-m-gray word-break">东莞市东城区关张路俯身大厦308东莞市东城区关张路俯身大厦308</p>
+					</div>
+					<div class="cols t-r">
+						<i class="iconfont icon-duigou f-red address-select-gou fw none">&nbsp;</i>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<a href="javascript:void(0);" class="all-order-one-btn t-c red-bg all-order-font-m f-white" id="submitData" onclick="submitData();">确定</a>
+		
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+	//选择任意一个地址
+	$(".address-select-li").click(function(){
+		$(document).find(".icon-duigou").addClass("none");
+		$("#selectAddressName,#selectAddressTel,#selectAddressInfo").val("");
+		$(this).children("div").eq(1).children("i").removeClass("none");
+		$("#selectAddressName").val($(this).children("div").eq(0).children("p").eq(0).text());
+		$("#selectAddressTel").val($(this).children("div").eq(0).children("p").eq(1).text());
+		$("#selectAddressInfo").val($(this).children("div").eq(0).children("p").eq(2).text());
+		addHref("submitData");
+	});
+});
+
+//提交按钮
+function submitData(){
+	var selectAddressName = $("#selectAddressName").val();
+	//未选中
+	if(selectAddressName == ""){
+		$.toast("请选择一个商品退回的地址", 2000);
+		//移除事件
+	  	removeHref("submitData");
+	  	//2s过后添加事件
+	  	setTimeout("addHref('submitData');",2100);
+	}
+	else{
+		var selectAddressName = $("#selectAddressName").val();
+		var selectAddressTel = $("#selectAddressTel").val();
+		var selectAddressInfo = $("#selectAddressInfo").val();
+		alert(selectAddressName+"***"+selectAddressTel+"***"+selectAddressInfo);
+		//退款页面
+		window.location.href="refund-price.html";
+	}
+}
+
+</script>
+</body>
+</html>

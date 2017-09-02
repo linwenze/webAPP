@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>商品添加（周边店）</title>
+<link href="css/sm.css" rel="stylesheet">
+
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+	<header class="bar bar-nav red-bg header-no-border">
+		<a class="icon pull-left f-white back-prev-link" onclick="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">添加商品</h1>
+	</header>
+    
+	<div class="content">
+        <div class="goods-add-area footer-padding">
+        	<div class="block-box">
+            	<div class="li-block-tit">商品图片 <em class="sma-font f-gray">(至少1张，最多5张)</em></div><!--end li-block-tit -->
+                <div class="goods-photo-add">
+                	<ul class="ul-list">
+                    	<li><img src="ad/001.jpg" class="photo"> <i class="close-but">&nbsp;</i></li>
+                        <li><img src="ad/002.jpg" class="photo"> <i class="close-but">&nbsp;</i></li>
+                        <li><a class="photo-operate-but photo-add-but">添加图片</a></li>
+                        <li><a class="photo-operate-but photo-red-but">删除图片</a></li>
+                    </ul>
+                </div><!--end goods-photo-add -->
+            </div><!--end block-box-->
+            
+            <div class="block-box">
+				<ul class="add-ul">
+                    <li>
+                    	<span class="tt">商品标题<em class="f-red">*</em></span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                    <li>
+                    	<span class="tt">副标题</span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                </ul>
+            </div><!--end block-box -->
+              
+            
+            <div class="block-box">
+                <ul class="add-ul">
+                    <li class="ul-a">
+                    	<a href="#">
+                    		<span class="tt">商品类目<em class="f-red">*</em></span> <i class="iconfont icon-xiangyou">&nbsp;</i>
+                        </a>
+                    </li>
+                    <li>
+                    	<span class="tt">实际库存</span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                </ul>
+            </div><!--end block-box -->
+            
+            <div class="block-box">
+				<ul class="add-ul">
+                    <li>
+                    	<span class="tt">线上价格<em class="f-red">*</em></span>
+                        <div class="con"><input name="" type="text" placeholder="¥请输入" class="add-itxt"></div>
+                    </li>
+                    <li>
+                    	<span class="tt">商品原价</span>
+                        <div class="con"><input name="" type="text" placeholder="¥请输入" class="add-itxt"></div>
+                    </li>
+                    
+                </ul>
+            </div><!--end block-box -->
+            
+             <div class="block-box">
+				<ul class="add-ul">
+					<li class="ul-a">
+                    	<a href="goods-editor.html">
+                    		<span class="tt">商品详细描述</span> <i class="iconfont icon-xiangyou">&nbsp;</i>
+                        </a>
+                    </li>
+                    <li>
+                    	<span class="tt">商品品牌</span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                </ul>
+            </div><!--end block-box -->
+            
+            
+            
+            <div class="block-box">
+				<ul class="add-ul">
+					<li>
+                    	<span class="tt">商品限购</span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                    <li>
+                    	<span class="tt">商品排序</span>
+                        <div class="con"><input name="" type="text" placeholder="请输入" class="add-itxt"></div>
+                    </li>
+                    <li class="ul-a">
+                    	<div class="optional-return-choose">
+		                	<label class="input-checkbox fr">
+		                    	<input type="checkbox" id="test" checked="checked"> <div><i>&nbsp;</i> <span>否</span> <span>是</span></div>
+		                    </label>
+		                    
+		                	是否支持七天无理由退货
+		                </div><!--end optional-return-choose -->
+                    </li>
+                </ul>
+            </div><!--end block-box -->
+            
+        </div><!--end goods-add-area -->
+        
+	</div><!--end content -->
+    
+    <footer class="footer">
+        <div class="two-button">
+        	<input name="" type="button" class="usbut org-button" id="goods-edit-save" value="保存">
+            <input name="" type="button" class="usbut red-button" id="goods-putaway-save" value="上架">
+        </div><!--end two-button -->
+    </footer>
+    
+</div><!--end page -->
+
+
+
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+alert($("#test").is(":checked"));
+$(function(){
+	$(document).on("click","#goods-edit-save",function(){
+		$.toast("保存成功",1000);
+	})
+	
+	$(document).on("click","#goods-putaway-save",function(){
+		$.toast("上架成功",1000);
+	})
+})
+</script>
+
+
+
+
+
+</body>
+</html>

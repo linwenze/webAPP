@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>搜索</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-allOrder-search">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);" onclick="delLoaclTabInfo();"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<a class="icon pull-right f-white all-order-font-b" href="javascript:void(0);" onclick="searchDate();">搜索</a>
+		<h1 class="title">
+			<input type="text"  class="all-order-search-input" placeholder="请输入商品名称，订单号或手机号" id="seachInput">
+		</h1>
+	</header>
+	<div class="buttons-tab all-order-subnav fixed-tab">
+		<a href="#tab1" class="tab-link button newbtn active" id="tabA1">手机号</a>
+	    <a href="#tab2" class="tab-link button newbtn" id="tabA2">订单号</a>
+	    <a href="#tab3" class="tab-link button newbtn" id="tabA3">商品名称</a>
+	</div>
+		
+	<div id="content" class="content all-order-search-content infinite-scroll infinite-scroll-bottom pull-to-refresh-content" data-ptr-distance="55" data-distance="50"> 
+	  	<!-- 默认的下拉刷新层 -->
+	    <div class="pull-to-refresh-layer">
+	        <div class="preloader"></div>
+	        <div class="pull-to-refresh-arrow"></div>
+	    </div>
+		<div class="tabs">
+		  <!-- 手机号 strat -->
+		  <div id="tab1" class="tab active" index="1">
+		  	<!-- 手机号 第一条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>60.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		    <!-- 手机号 第二条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">优惠（满50减2）</div>
+		    			<div class="cols t-r all-order-font-s f-m-gray">-￥2.00</div>
+		    		</div>
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>58.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		  </div>
+		  <!-- 手机号 end -->
+		  
+		  <!-- 订单号 strat -->
+		  <div id="tab2" class="tab" index="2">
+		    <!-- 订单号 第一条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>60.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		    <!-- 订单号 第二条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">优惠（满50减2）</div>
+		    			<div class="cols t-r all-order-font-s f-m-gray">-￥2.00</div>
+		    		</div>
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>58.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		  </div>
+		  <!-- 订单号 end -->
+		  
+		  <!-- 商品名称 start -->
+		  <div id="tab3" class="tab" index="3">
+		    <!-- 商品名称 第一条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>60.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		    <!-- 商品名称 第二条数据 -->
+		    <ul class="all-order-ullist" onclick="gotoDetailPage()">
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+					    <div class="cols cols-25">
+					    	 <img src="ad/001.jpg" class="all-order-ullist-img">
+					    </div>
+					    <div class="cols t-l">
+					    	 <p class="all-order-ullist-title f-m-gray all-order-font-m">5种商品，共10件</p>
+					    	 <p class="all-order-ullist-money f-red all-order-font-zb"><span class="f-gray all-order-font-s">合计：</span><span class="f-red all-order-font-s">￥</span>60.00</p>
+					    </div>
+					</div>
+		    	</li>
+		    	<li class="ui-border-b">
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">优惠（满50减2）</div>
+		    			<div class="cols t-r all-order-font-s f-m-gray">-￥2.00</div>
+		    		</div>
+		    		<div class="rows-m">
+		    			<div class="cols t-l all-order-font-s f-m-gray">实付金额</div>
+		    			<div class="cols t-r all-order-font-zb f-red"><span class="f-red all-order-font-s">￥</span>58.00</div>
+		    		</div>
+		    	</li>
+		    	<li class="f-gray all-order-font-s">
+		    		<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>
+		    	</li>
+		    </ul>
+		  </div>
+		  <!-- 商品名称 end -->
+		  
+		</div><!--end tabs -->
+		
+	   <!-- 底部滚动，加载提示符 -->
+       <div class="infinite-scroll-preloader hide">
+           <div class="preloader"></div>
+       </div>
+       
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+//去详情
+function gotoDetailPage(){
+	//存储tab点击的下标数据
+	setLoaclTabInfo($(document).find(".tab.active").attr("index"));
+	
+	//请根据订单状态，自己调整不同类型的订单详情页面
+	window.location.href = "allOrder-detail-one.html"; //全部订单--待付款-详情
+	
+	//window.location.href = "allOrder-detail-two-one.html"; //全部订单--待发货-核销订单详情
+    //window.location.href = "allOrder-detail-two-two.html"; //全部订单--待发货-云上店订单详情
+    //window.location.href = "allOrder-detail-two-three.html"; //全部订单--待发货-周边订单详情
+    
+    //window.location.href = "allOrder-detail-three.html"; //全部订单--待收货-详情
+    
+    //window.location.href = "allOrder-detail-four-one.html"; //全部订单--已完成-评价-详情
+   //window.location.href = "allOrder-detail-four-two.html"; //全部订单--已完成-取消订单-投诉-详情
+   //window.location.href = "allOrder-detail-four-three.html"; //全部订单--已完成-投诉-详情
+   //window.location.href = "allOrder-detail-four-four.html"; //全部订单--已完成-退-详情
+   
+   //window.location.href = "allOrder-detail-five.html"; //全部订单--已取消-详情
+}
+
+//获取存储tab点击的下标数据
+getLoaclTabInfo();
+
+
+// 加载flag
+var loading = false;
+// 最多可加载的条目,数据总条数
+var maxItems = 100;
+// 每次加载添加多少条目,每页数据条数
+var itemsPerLoad = 20;
+//上次加载的条数序号
+var lastIndex = itemsPerLoad;
+
+//当前显示的标签tabId
+var showTabId = $(document).find(".tab.active").attr("id");
+var showTabIndex = $(document).find(".tab.active").attr("index");
+//预先加载20条
+addNewOrderItems(showTabId,showTabIndex,itemsPerLoad, 0);
+
+$(function () {
+	//tab切换
+	$(".tab-link").click(function(){
+		$("#content").scrollTop(0);
+		//当前显示的标签tabId
+		$(this).addClass("active").siblings().removeClass("active");
+		var clickIndex = $(this).index();
+		
+		//显示搜索输入框的Placeholder
+		showInputPlaceholder(clickIndex);
+		
+		//存储tab点击的下标数据
+		setLoaclTabInfo(clickIndex);
+		
+		$(".tab").eq(clickIndex).addClass("active").siblings().removeClass("active");
+		var showTabId = $(document).find(".tab.active").attr("id");
+		var showTabIndex = $(document).find(".tab.active").attr("index");
+		//预先加载20条
+		console.log(showTabId+"==="+showTabIndex);
+		//addNewOrderItems(showTabId,showTabIndex,itemsPerLoad, 0);
+	});
+
+  
+  	// 注册'infinite'事件处理函数，到达底部滚动事件
+  	$(document).on('infinite', '.infinite-scroll-bottom',function() {
+		  $(".infinite-scroll-preloader").show();
+		  // 如果正在加载，则退出
+		  if (loading) return;
+		  // 设置flag
+		  loading = true;
+		  // 模拟1s的加载过程
+		  setTimeout(function() {
+		      // 重置加载flag
+		      loading = false;
+		      if (lastIndex >= maxItems) {
+		          // 加载完毕，则注销无限加载事件，以防不必要的加载
+		          $.detachInfiniteScroll($('.infinite-scroll'));
+		          // 删除加载提示符
+		          $('.infinite-scroll-preloader').remove();
+		          return;
+		      }
+		      //当前显示的标签tabId
+		      var showTabId = $(document).find(".tab.active").attr("id");
+		      var showTabIndex = $(document).find(".tab.active").attr("index");
+		      // 添加新条目
+		      addNewOrderItems(showTabId,showTabIndex,itemsPerLoad, lastIndex);
+		      // 更新最后加载的序号
+		      lastIndex = $('#'+showTabId+' ul').length;
+		      //容器发生改变,如果是js滚动，需要刷新滚动
+		      $.refreshScroller();
+		  }, 1000);
+  	});
+  
+	// 添加'refresh'监听器，下拉刷新事件
+	$(document).on('refresh', '.pull-to-refresh-content',function(e) {
+	    // 模拟2s的加载过程
+	    setTimeout(function() {
+	        //当前显示的标签tabId
+	      var showTabId = $(document).find(".tab.active").attr("id");
+	      var showTabIndex = $(document).find(".tab.active").attr("index");
+	       // 添加新条目
+	      addNewOrderItems(showTabId,showTabIndex,itemsPerLoad, lastIndex);
+	        // 加载完毕需要重置
+	        $.pullToRefreshDone('.pull-to-refresh-content');
+	    }, 2000);
+	});
+
+});
+
+function addNewOrderItems(tabId,tabIndex,number, lastIndex) {
+  // 生成新条目的HTML
+  var $data = "<ul class='all-order-ullist' onclick='gotoDetailPage()'>"+
+		    	"<li class='ui-border-b'>"+
+		    		"<div class='rows-m'>"+
+					    "<div class='cols cols-25'>"+
+					    	 "<img src='ad/001.jpg' class='all-order-ullist-img'>"+
+					    "</div>"+
+					    "<div class='cols t-l'>"+
+					    	 "<p class='all-order-ullist-title f-m-gray all-order-font-m'>5种商品，共10件"+tabId+"</p>"+
+					    	 "<p class='all-order-ullist-money f-red all-order-font-zb'><span class='f-gray all-order-font-s'>合计：</span><span class='f-red all-order-font-s'>￥</span>60.00</p>"+
+					    "</div>"+
+					"</div>"+
+		    	"</li>"+
+		    	"<li class='ui-border-b'>"+
+		    		"<div class='rows-m'>"+
+		    			"<div class='cols t-l all-order-font-s f-m-gray'>实付金额</div>"+
+		    			"<div class='cols t-r all-order-font-zb f-red'><span class='f-red all-order-font-s'>￥</span>60.00</div>"+
+		    		"</div>"+
+		    	"</li>"+
+		    	"<li class='f-gray all-order-font-s'>"+
+		    		"<div>下单时间&nbsp;&nbsp;&nbsp;<span>2015-05-04&nbsp;&nbsp;&nbsp;21:15:17</span></div>"+
+		    	"</li>"+
+		    "</ul>";
+  // 添加新条目
+  $('#'+tabId).append($data);
+}
+
+//显示搜索输入框的Placeholder
+function showInputPlaceholder(index){
+	switch(index)
+	{
+      case 0:
+       $("#seachInput").attr("placeholder","请输入手机号码");
+       break; 
+      case 1:
+       $("#seachInput").attr("placeholder","请输入订单号");
+       break; 
+      case 2:
+       $("#seachInput").attr("placeholder","请输入商品名称");
+       break; 
+    }
+}
+
+//存储tab点击的下标数据
+function setLoaclTabInfo(clickIndex){
+	var localOrderTabObj = {};
+	localOrderTabObj.showActiveIndex = clickIndex;
+	localStorageUtil.setLocalStorageItem("allOrderSearchTab",localOrderTabObj);
+}
+
+//获取存储tab点击的下标数据
+function getLoaclTabInfo(){
+	//获取tab选中下标数据
+	var showActiveIndex = 1;
+	if(localStorageUtil.getLocalStorageItem("allOrderSearchTab") != undefined){
+		showActiveIndex = localStorageUtil.getLocalStorageItem("allOrderSearchTab").showActiveIndex;
+	}
+	
+	//显示搜索输入框的Placeholder
+	showInputPlaceholder(parseInt(showActiveIndex)-1);
+	//强制选中tab
+	$("#tabA"+showActiveIndex).addClass("active").siblings().removeClass("active");
+	$("#tab"+showActiveIndex).addClass("active").siblings().removeClass("active");
+}
+	
+//删除存储tab点击的下标数据	
+function delLoaclTabInfo(){
+	localStorageUtil.delLocalStorageItem("allOrderSearchTab");
+}
+
+//搜索方法
+function searchDate(){
+	alert("搜索方法");
+	var seachInput = $("#seachInput").val();
+	//输入不为空进行搜索
+	if(seachInput.trim() != ""){
+		
+	}
+}
+</script>
+</body>
+</html>

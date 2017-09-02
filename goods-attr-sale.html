@@ -1,0 +1,223 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>选择销售属性</title>
+<link href="css/sm.css" rel="stylesheet">
+
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="page">
+	<header class="bar bar-nav red-bg header-no-border">
+		<a class="icon pull-left f-white back-prev-link" onclick="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">价格与规格</h1>
+	</header>
+
+	<div class="content">
+        <div class="goods-add-area footer-padding-new">
+            <div class="block-box">
+            	<div class="li-block-tit-new">颜色分类<p class="error-tip hide" id="color-error-tip">您自定义的颜色已存在，请重新定义</p></div><!--end li-block-tit -->
+            	<ul class="ul-list user-defined-con new color-ul" id="color-ul">
+					 <li><a class="new"><input type="text" placeholder="自定义颜色" class="user-defined-con-input t-c" id="color-input"></a></li>
+				</ul>
+				<div class="size-choose color-select-ul">
+                    <ul class="ul-list con color-ul">
+                        <li><a>白色</a></li> <li><a>米白色</a></li> <li><a>超浅灰</a></li>
+                        <li><a>浅灰色</a></li> <li><a>深灰色</a></li> <li><a>灰色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                        <li><a>橘红色</a></li> <li><a>深绿色</a></li> <li><a>纯白色</a></li>
+                    </ul>
+                    <span class="linkmore iconfont icon-xiangxia1">&nbsp;</span>
+                </div><!--end size-choose -->
+            </div><!--end block-box -->
+            
+            <div class="block-box">
+            	<div class="li-block-tit-new">尺寸<p class="error-tip hide" id="size-error-tip">您自定义的尺寸已存在，请重新定义</p></div><!--end li-block-tit -->
+            	<ul class="ul-list user-defined-con new size-ul" id="size-ul">
+					 <li><a class="new"><input type="text" placeholder="自定义尺寸" class="user-defined-con-input t-c" id="size-input"></a></li>
+				</ul>
+				<div class="size-choose size-select-ul">
+                    <ul class="ul-list con size-ul">
+                        <li><a>CL</a></li> <li><a>L</a></li> <li><a>XL</a></li>
+                        <li><a>XXL</a></li> 
+                    </ul>
+                    <span class="linkmore iconfont icon-xiangxia1">&nbsp;</span>
+                </div><!--end size-choose -->
+            </div><!--end block-box -->
+            
+             <div class="white-bg last-input">
+	        	<div class="li-block-tit-new">价格与库存<p class="error-tip" id="last-error-tip">不选规格，默认不同规格商品具有相同的价格与库存</p></div><!--end li-block-tit -->
+	        	<ul class="price-ul crbox" id="last-ul">
+	        		<li>
+	        			<input type="text" placeholder="输入线上价格" class="fl">
+	        			<span class="start-red f-red">*</span>
+	        			<p class="select-text hide" id="select-text">白色+CL</p>
+	        		</li>
+	        		<li><input type="text" placeholder="实际库存" class="fr"></li>
+	        	</ul>
+	        	<ul class="price-ul crbox new">
+	        		<li><input type="text" placeholder="输入原价" class="fl"></li>
+	        		<li><input type="text" placeholder="输入库存" class="fr"></li>
+	        	</ul>
+        	</div><!--end block-box -->
+            
+        </div><!--end goods-add-area -->
+	</div><!--end content -->
+    
+    <footer class="footer">
+        <input name="" type="button" class="footer-all-but" value="确定">
+    </footer>
+    
+</div><!--end page -->
+
+
+
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+
+<script>
+$(function(){
+	//颜色
+	$(".color-select-ul li a").on("click",function(){
+		$(".user-defined-color-li a").removeClass("active");
+		$(this).addClass("active");
+		$(this).parent().siblings().find("a").removeClass("active");
+		//设置选中的字体显示
+		setSelectText();
+	});
+	
+	//尺寸
+	$(".size-select-ul li a").on("click",function(){
+		$(".user-defined-size-li a").removeClass("active");
+		$(this).addClass("active");
+		$(this).parent().siblings().find("a").removeClass("active");
+		//设置选中的字体显示
+		setSelectText();
+	});
+	
+	sizeChoose(); $(document).resize(function(){sizeChoose();})//绑定属性打开收起事件
+	
+	//自定义颜色
+	$("#color-input").blur(function(){
+		var count = 0;
+		if($(this).val().trim() != ""){
+			var val = $(this).val();
+			$(".color-ul li a").each(function(){
+				if($(this).text() == val){
+					count = 1;
+				}
+			});
+			if(count == 1){
+				$("#color-error-tip").show();
+			}
+			else{
+				$("#color-error-tip").hide();
+				var $li = "<li class='user-defined-color-li'><a>"+val+"</a></li>";
+				$("#color-ul").prepend($li);
+				$(this).val("");
+			}
+		}
+		$(".user-defined-color-li a").on("click",function(){
+			$(".color-select-ul li a").removeClass("active");
+			$(this).addClass("active");
+			$(this).parent().siblings().find("a").removeClass("active");
+			//设置选中的字体显示
+			setSelectText();
+		});
+	});
+	
+	//自定义尺寸
+	$("#size-input").blur(function(){
+		var count = 0;
+		if($(this).val().trim() != ""){
+			var val = $(this).val();
+			$(".size-ul li a").each(function(){
+				if($(this).text() == val){
+					count = 1;
+				}
+			});
+			if(count == 1){
+				$("#size-error-tip").show();
+			}
+			else{
+				$("#size-error-tip").hide();
+				var $li = "<li class='user-defined-size-li'><a>"+val+"</a></li>";
+				$("#size-ul").prepend($li);
+				$(this).val("");
+			}
+		}
+		$(".user-defined-size-li a").on("click",function(){
+			$(".size-select-ul li a").removeClass("active");
+			$(this).addClass("active");
+			$(this).parent().siblings().find("a").removeClass("active");
+			//设置选中的字体显示
+			setSelectText();
+		});
+	});
+	
+	//确定按钮
+	$(".footer-all-but").click(function(){
+		var color = $(".color-ul li a.active").text();
+		var size = $(".size-ul li a.active").text();
+		alert(color+"==="+size);
+	})
+})
+
+//设置选中的字体显示
+function setSelectText(){
+	var color = $(".color-ul li a.active").text() == null ? "" : $(".color-ul li a.active").text();
+	var size = $(".size-ul li a.active").text()== null ? "" : $(".size-ul li a.active").text();
+	$("#last-error-tip").hide();
+	$("#last-ul").addClass("showtitle");
+	if(color != "" && size == ""){
+		$("#select-text").text(color).show();
+	}
+	if(size != "" && color == ""){
+		$("#select-text").text(size).show();
+	}
+	else if(color != "" && size != "")
+	{
+		$("#select-text").text(color+"+"+size).show();
+	}
+}
+
+function sizeChoose(){
+	$(".size-choose").each(function(){
+		var linkBut = $(".linkmore",this);
+		if($("li",this).length > 9){
+			var con = $(".con",this);
+			var height = con.height();
+			var pad = parseInt($(".con",this).css("padding-top"));
+			var conHeight = $("li",this).outerHeight()*3 + pad;
+			con.height(conHeight);
+			
+			linkBut.on("click",function(){
+				if(con.height()==conHeight){
+					con.height(height);
+					$(this).removeClass("icon-xiangxia1").addClass("icon-xiangshang");
+				}else{
+					con.height(conHeight);
+					$(this).removeClass("icon-xiangshang").addClass("icon-xiangxia1");
+				}
+			})
+			
+		}else{
+			linkBut.css("color","#eee");
+		}
+	})
+}
+
+</script>
+</body>
+</html>

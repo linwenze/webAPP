@@ -1,0 +1,163 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>店铺统计</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1)"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">店铺统计</h1>
+	</header>
+	<div class="content">
+    	<div class="list-app-box shop-statistics crbox">
+	      <ul>
+	      	<li><div class="item-static">年度总营收（元）</div><div class="item-money f-red static-ml">500.00</div></li>
+	      	<li><div class="item-static">店铺总营收（元）</div><div class="item-money f-green static-ml">2000.00</div></li>
+	      </ul>
+
+		</div><!--end list-app-box-->
+		
+		<div class="list-tabs crbox">
+			<ul class="crbox">
+				<li><span class="list-tabs-li tabs-active">日报</span></li>
+				<li><span class="list-tabs-li">月报</span></li>
+			</ul>
+			
+		</div><!--end list-tabs-->
+		<div id="tab-day" class="list-tab-box"> 
+			<div class="static-datetime crbox"><span class="static-datetime-icon fl">选择日期</span><span class="static-datetime-day fr" style="padding-right: 1rem;"><input type="text" id="static-day" class="static-datetime-input" placeholder="请选择日期"  /></span><i class="iconfont icon-xiangyou icon-r "></i></div>
+			  <div class="static-acount">
+			  	<div class="static-acount-title">成交订单总数</div>
+			  	<div class="static-acount-main">
+			  		<ul>
+			  			<li class="crbox"><span class="static-acount-col">昨日</span><span class="static-acount-num f-green">1</span></li>
+			  			<li class="crbox"><span class="static-acount-col">今日</span><span class="static-acount-num f-red">5</span></li>
+			  			<li class="crbox"><span class="static-acount-col">较上期</span><span class="static-acount-num">400%<i class="iconfont icon-xiangshang1 icon-top"></i></span></li>
+			  		</ul>
+			  		
+			  	</div>
+			  	
+			  </div><!--end static-acount-->
+			  
+			   <div class="static-acount">
+			  	<div class="static-acount-title">成交订单总额</div>
+			  	<div class="static-acount-main">
+			  		<ul>
+			  			<li class="crbox"><span class="static-acount-col">昨日</span><span class="static-acount-num f-green">￥1000</span></li>
+			  			<li class="crbox"><span class="static-acount-col">今日</span><span class="static-acount-num f-red">￥500</span></li>
+			  			<li class="crbox"><span class="static-acount-col">较上期</span><span class="static-acount-num">400%<i class="iconfont icon-xiangshang1 icon-top"></i></span></li>
+			  		</ul>
+			  		
+			  	</div>
+			  	
+			  </div><!--end static-acount-->
+			  
+		</div><!--end tab-day-->
+		
+		<div id="tab-month" class="list-tab-box"> 
+           <div class="static-datetime crbox"><span class="static-datetime-icon fl">选择日期</span><span class="static-datetime-day fr" style="padding-right: 1rem;"><input type="text" id="static-date" class="static-datetime-input" placeholder="请选择日期"  /></span><i class="iconfont icon-xiangyou icon-r "></i></div>
+			 <div class="static-acount">
+			  	<div class="static-acount-title">成交订单总数</div>
+			  	<div class="static-acount-main">
+			  		<ul>
+			  			<li class="crbox"><span class="static-acount-col">昨日</span><span class="static-acount-num f-green">1</span></li>
+			  			<li class="crbox"><span class="static-acount-col">今日</span><span class="static-acount-num f-red">5</span></li>
+			  			<li class="crbox"><span class="static-acount-col">较上期</span><span class="static-acount-num">400%<i class="iconfont icon-xiangshang1 icon-top"></i></span></li>
+			  		</ul>
+			  		
+			  	</div>
+			  	
+			  </div><!--end static-acount-->
+			  
+			   <div class="static-acount">
+			  	<div class="static-acount-title">成交订单总额</div>
+			  	<div class="static-acount-main">
+			  		<ul>
+			  			<li class="crbox"><span class="static-acount-col">昨日</span><span class="static-acount-num f-green">￥1000</span></li>
+			  			<li class="crbox"><span class="static-acount-col">今日</span><span class="static-acount-num f-red">￥500</span></li>
+			  			<li class="crbox"><span class="static-acount-col">较上期</span><span class="static-acount-num">400%<i class="iconfont icon-xiangxia icon-top"></i></span></li>
+			  		</ul>
+			  		
+			  	</div>
+			  	
+			  </div><!--end static-acount-->
+			  
+		</div><!--end tab-month-->
+		
+	</div><!--end content -->
+    <div class="picker-shadow" ></div>
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+$(function(){
+	$('.list-tabs-li').click(function(){
+		$('.list-tabs-li').removeClass ('tabs-active');
+		$ (this).addClass ('tabs-active').siblings ().removeClass ('tabs-active');
+		$(".list-tab-box").hide().eq($('.list-tabs-li').index(this)).show(); 
+	})	
+	//遮罩层效果 
+	$('.static-datetime-input').click(function(){
+		$('.picker-shadow').show();
+	})
+	$('.picker-calendar-day').live('click',function() {
+		$('.picker-shadow').hide();
+		})
+	$('.picker-shadow').click(function(){
+		$('.picker-shadow').hide();
+	})
+	//日格式设置
+
+	$("#static-day").datetimePicker({
+		toolbarTemplate: '<header class="bar bar-nav barbg">\
+	  <button class="button button-link pull-right close-picker" onclick="closePicker();">确定</button>\
+	  <h1 class="title">时间选择</h1>\
+	  </header>',
+		value: ['2016', '02', '06', '12', '56']
+	});
+	/*$("#static-day").calendar({
+        dateFormat:"yyyy-mm-dd",
+		onOpen:function(p){
+			delCalenderAlink(); //删除 日历控件内a连接的 href属性 防止 点击箭头时 刷新页面
+		}
+    });*/
+
+	//月份格式设置
+
+	$("#static-date").datetimePicker({
+		toolbarTemplate: '<header class="bar bar-nav barbg">\
+	  <button class="button button-link pull-right close-picker" onclick="closePicker();">确定</button>\
+	  <h1 class="title">时间选择</h1>\
+	  </header>',
+		value: ['2016', '02', '06', '12', '56']
+	});
+	/*$("#static-date").calendar({
+        dateFormat:"yyyy-mm",
+		onOpen:function(p){
+			delCalenderAlink(); //删除 日历控件内a连接的 href属性 防止 点击箭头时 刷新页面
+		}
+    });*/
+})
+
+//关闭时间遮罩层
+function closePicker(){
+	$('.picker-shadow').hide();
+}
+</script>
+</body>
+</html>

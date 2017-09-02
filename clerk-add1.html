@@ -1,0 +1,119 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>新增店员-queding</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="clerk-add1">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">新增店员</h1>
+	</header>
+
+	<div class="content hidden-scroll">
+		<form action="" onsubmit="return check()" >
+			<div class="list-app-box withdraw no-margin">
+				<ul>
+					<li class="noborbot">
+						<div class="list-block">
+							<span class="input-title-l">是否为店长 <i class="f-red">*</i> </span>
+							<div class="radio-box">
+								<label class="input-radio"><input name="isManager" type="radio" value="1"><em>&nbsp;</em> 店长</label>&nbsp;&nbsp;&nbsp;
+
+								<label class="input-radio"><input name="isManager" type="radio" value="2" checked="checked"><em>&nbsp;</em> 非店长</label>
+							</div>
+						</div>
+					</li>
+					<li class="has-margin">
+						<span class="input-title-l">店员姓名 <i class="f-red">*</i></span>
+						<input type="text" class="input-itxt rr t-l" id="clerkname" placeholder="请输入店员姓名" maxlength="50" />
+					</li><!--end -->
+					<li>
+						<span class="input-title-l">账号 <i class="f-red">*</i></span>
+						<input type="text" class="input-itxt rr t-l" id="account" placeholder="请输入账号" maxlength="50"/>
+					</li><!--end -->
+					<li class="noborbot">
+						<span class="input-title-l">密码 <i class="f-red">*</i></span>
+						<input type="text" class="input-itxt rr t-l" id="password" placeholder="请输入密码" maxlength="50"/>
+					</li><!--end -->
+					<li class="gray-bg1 noborbot">
+						<span class="input-title-l">可登陆终端 <i class="f-red">*</i></span>
+					</li><!--end -->
+					<li class="gray-bg1 noborbot">
+						<p class="terminal-item t-c checked">POS机 <i class="iconfont icon-fuxuangougou f-red"></i></p>
+						<p class="terminal-item t-c ">商家app <i class="iconfont icon-fuxuangougou f-red"></i></p>
+						<p class="terminal-item t-c">商家中心 <i class="iconfont icon-fuxuangougou f-red"></i></p>
+						<input type="hidden" id="terminal" value="POS机"/>
+					</li>
+				</ul>
+
+				<p class="btn-p t-c m" >
+					<!--<a href="clerk-manager.html" class="next-btn confirm">确定</a>-->
+					<input type="submit" class="next-btn confirm" value="确定"  />
+				</p>
+
+
+			</div><!--end list-app-box-->
+		</form><!--end form-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+
+	$(function(){
+		/*选择终端*/
+		$(".terminal-item").click(function(){
+			if($(this).hasClass("checked")){
+				$(this).removeClass("checked")
+			}else{
+				$(this).addClass("checked")
+			}
+			var getCheceked="";
+			$(".terminal-item").each(function(i,elt){
+				if($(elt).hasClass("checked")){
+					getCheceked +=$(elt).text().trim()+",";
+				}
+			});
+			$("#terminal").val(getCheceked);
+		});
+	});
+
+	/*表单检验*/
+	function check(){
+		var clerkName = $("#clerkname").val(); // 店员姓名
+		if(clerkName.trim().length < 1 ){
+			$.toast("姓名不能为空");
+			return false;
+		}
+		var account = $("#account").val(); // 账号
+		if(account.trim().length < 1 ){
+			$.toast("账号不能为空");
+			return false;
+		}
+		var password = $("#password").val(); // 密码
+		if(password.trim().length < 1 ){
+			$.toast("密码不能为空");
+			return false;
+		}
+		return true;
+	}
+
+</script>
+</body>
+</html>

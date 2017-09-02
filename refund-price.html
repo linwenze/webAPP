@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+<meta name="format-detection" content="telephone=no" />
+<title>退款</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page gray-bg" id="page-refund-price">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:history.go(-1);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<h1 class="title f-white">退款</h1>
+	</header>
+
+	<div class="content white-bg"> 
+		<div class="refund-price-box t-c">
+			<p class="f-m-gray all-order-font-m refund-price-title">退款金额</p>
+			<p class="f-red refund-price-line"><span>￥</span>60.00</p>
+		</div>
+		<div class="t-c refund-price-content">
+			<input type="password" class="all-order-font-s refund-price-input t-l" placeholder="请输入支付密码" id="payPassWord" maxlength="10">
+		</div>
+		<div class="t-c refund-price-content">
+			<a href="javascript:void(0);" class="t-c fr f-white refund-price-btn red-bg" id="submitData" onclick="submitData();">确定支付</a>
+		</div>
+	</div><!--end content -->   
+</div><!--end page -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+//确定支付按钮
+function submitData(){
+	//payPassWord:支付密码
+  	if(isEmptyInputVal("payPassWord","请输入支付密码")){
+  		//$.toast("您已经同意退货退款申请，请在“售后-退款成功”中查看", 2000);
+		
+		layerOpen("您已经同意退货退款申请，请在“售后-退款成功”中查看");
+  		//window.location.href="allOrder-refund.html";
+  	}
+  	
+  	//移除事件
+  	removeHref("submitData");
+  	//2s过后添加事件
+  	setTimeout("addHref('submitData');",2100);
+}
+
+//判断输入是否存在空值
+function isEmptyInputVal(id,tip){
+	var flag = true;
+	if($("#"+id).val() == ""){
+		flag = false;
+		$.toast(tip, 2000);
+	}
+	return flag;
+}
+
+//取消支付按钮
+function cancelPlay(){
+	$.toast("取消支付", 2000);
+}
+</script>
+</body>
+</html>
