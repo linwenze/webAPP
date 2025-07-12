@@ -1,0 +1,94 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" /> 
+
+<title>提现</title>
+<link href="css/sm.css" rel="stylesheet">
+<link href="css/iconfont/iconfont.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="page" id="withdraw">
+	<header class="bar bar-nav red-bg">
+		<a class="icon pull-left f-white back-prev-link" href="javascript:void(0);"><i class="iconfont icon-fanhui">&nbsp;</i></a>
+		<a href="withdraw-recorder.html" class="button button-link button-nav pull-right f-white">提现记录</a>
+		<h1 class="title f-white">提现</h1>
+	</header>
+	<div class="content hidden-scroll">
+    	<div class="list-app-box withdraw">
+			<ul>
+				<li>
+					<span class="input-title-l">账户余额</span>
+					<input type="text" class="input-itxt r t-r" id="remaining-sum" placeholder="" value="200.00"/>
+				</li><!--end -->
+
+			</ul>
+
+			<p class="btn-p t-c ">
+				<input type="button" class="next-btn confirm" id="withdraw-btn" value="提现"/>
+			</p>
+
+
+		</div><!--end list-app-box-->
+	</div><!--end content -->
+    
+</div><!--end page -->
+
+<!-- no-card-bg 未绑定银行卡-->
+<div class="no-card-bg hide" id="no-card-bg">
+	<div class="con t-c">
+		<i class="no-card-close-btn">&nbsp;</i>
+		<p class="no-card-title">您还未绑定银行卡,不能提现请联系客服绑定银行卡</p>
+		<a href="tel:400-800-2356" class="no-card-tel-a"><i class="no-card-tel"></i>&nbsp;400-800-2356</a>
+		<p class="f-gray sma-font">客服工作时间9:00-22:00</p>
+	</div>
+</div><!--end no-card-bg -->
+
+<script src="js/zepto.js"></script>	
+<script>
+$.config = {
+    router: false
+}
+</script>
+<script src="js/sm.js"></script>
+<script src="js/all.js"></script>
+<script>
+   $(function(){
+   		//账户余额
+	   $("#remaining-sum").blur(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $(this).val(new Number(sum).toFixed(2));
+		   }else{
+			   $(this).val(new Number(0).toFixed(2));
+		   }
+	   }).keyup(function(){
+		   var sum = $(this).val();
+		   if(!isNaN(sum) && sum > 0){
+			   $("#withdraw-btn").removeAttr("disabled");
+		   }else{
+			   $("#withdraw-btn").attr("disabled","disabled");
+		   }
+	   });
+		
+	   //提现按钮
+	   $("#withdraw-btn").click(function(){
+		  //未绑定银行卡
+		  $("#no-card-bg").show();
+		  
+		  //绑定银行卡
+	   	   window.location.href="withdraw-next.html";
+	   });
+	   
+	  //未绑定银行卡
+	  $("#no-card-bg").on("click",function(){$(this).hide();});
+
+   })
+
+</script>
+
+</body>
+</html>
